@@ -1,0 +1,21 @@
+.btncontainer {
+  /* mt-10 flex w-full justify-center space-x-2 */
+  margin-top: 40px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.btn {
+  /* 'mb-2 flex w-full items-center justify-center rounded bg-darkblue px-6 py-2.5 font-poppins */
+  /* text-base font-medium text-white ' */
+  width: 100%;
+  border: 2px solid #e7e7e7;
+  color: blue;
+  font-size: large;
+  font-weight: 800;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.3rem;
+  padding-left: 0 40px;
+}

@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(169, 182, 194);
+  color: white;
+  height: 100vh;
+}
+.inputcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.formHeader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: medium;
+}
+.form {
+  max-width: 400px;
+}
+.headerquote {
+  padding: 20px;
+  align-items: center;
+  text-align: center;
+  font-size: large;
+  font-weight: 800;
+  display: flex;
+}
+.errorSpan {
+  font-size: small;
+  color: red;
+}
+.passwordInput {
+  position: relative;
+}
+/* absolute inset-y-0 right-3 top-8 flex items-center  */
+.passwordIconSpan {
+  position: absolute;
+  right: 10px;
+  top: 52px;
+  align-items: center;
+}
+.passwordIcon {
+  width: 16px;
+  cursor: pointer;
+}

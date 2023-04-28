@@ -13,13 +13,13 @@ const validate = yup.object().shape({
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
     .min(3)
     .max(12)
-    .required('Required field*'),
+    .required(' This is a Required field*'),
   lastname: yup
     .string()
     .min(3)
     .max(12)
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
-    .required('Required field*'),
+    .required('This is a Required field*'),
   email: yup
     .string()
     .email('email should be required format*')
@@ -27,10 +27,7 @@ const validate = yup.object().shape({
   password: yup
     .string()
     .min(6, 'Password should contain atleast 6 characters*')
-    .matches(
-      passwordpattern,
-      'Password must contain at least one capital letter, a small letter, a number and a special character*'
-    )
+    .matches(passwordpattern, 'Password must be strong*')
     .required('Password is a required field*'),
   mobile_number: yup
     .string()
@@ -45,7 +42,7 @@ const validate = yup.object().shape({
       is: (value) => (value || value > 0 ? true : false),
       then: yup
         .string()
-        .oneOf([yup.ref('password')], 'Please retype your new password. They do not match*')
+        .oneOf([yup.ref('password')], 'Please retype your password. They do not match*')
     })
     .required('This is a required fields*')
 });
@@ -71,13 +68,22 @@ const Signup = () => {
     validateOnChange: true,
     validationSchema: validate
   });
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 69 || e.keyCode === 190 || e.keyCode === 107 || e.keyCode === 189) {
+      // keyCode 69 represents the letter "e"
+      // keycode 190 represents the dot(.)
+      e.preventDefault();
+    }
+  };
 
   return (
     <div className='container'>
       <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
-          <div>Logo here</div>
-          <div className='headerquote'>We believe in Serving the best to our Customer</div>
+          <div>
+            <img src='/assets/images/Rozi roti-logos.jpeg' className='logo' />
+          </div>
+          <div className='headerquote'>We believe in Serving the best to our Customer !</div>
         </div>
         <div className='inputcontainer'>
           <div>
@@ -116,19 +122,20 @@ const Signup = () => {
           </div>
           <div>
             <InputField
-              type='text'
+              type='number'
               name='mobile_number'
               label='Mobile Number'
               role='mobile_number'
               value={formik.values.mobile_number}
               onBlur={formik.handleBlur}
-              placeholder='First Name'
+              placeholder='Please Enter your Mobile Number'
               onChange={formik.handleChange}
               className={
                 formik.touched.mobile_number && formik.errors.mobile_number
                   ? 'InputFieldError'
                   : 'InputField'
               }
+              onKeyDown={handleKeyPress}
             />
             <span className='errorSpan'>
               {formik.touched.mobile_number && formik.errors.mobile_number}
@@ -142,7 +149,7 @@ const Signup = () => {
               role='email'
               value={formik.values.email}
               onBlur={formik.handleBlur}
-              placeholder='First Name'
+              placeholder='Please Enter your Email'
               onChange={formik.handleChange}
               className={
                 formik.touched.email && formik.errors.email ? 'InputFieldError' : 'InputField'
@@ -154,7 +161,6 @@ const Signup = () => {
             <InputField
               type={passwordShown ? 'text' : 'password'}
               name='password'
-              role='Password'
               value={formik.values.password}
               label='Password'
               onBlur={formik.handleBlur}
@@ -201,9 +207,8 @@ const Signup = () => {
             <span className='errorSpan'>
               {formik.touched.confirmnewpassword && formik.errors.confirmnewpassword}
             </span>
-            <div>
-              <Button button={'Signup'} role='Submit' />
-            </div>
+
+            <Button button={'Signup'} role='Submit' />
           </div>
         </div>
       </form>

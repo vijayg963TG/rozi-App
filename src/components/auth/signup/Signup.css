@@ -2,9 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(169, 182, 194);
-  color: white;
-  height: 100vh;
+  background-color: white;
+  background-image: url('/public//assets//images/bg.jpg');
+  background-size: cover;
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .inputcontainer {
   display: flex;
@@ -21,8 +24,30 @@
   margin-bottom: 20px;
   font-size: medium;
 }
-.form {
-  max-width: 400px;
+@media (max-width: 767px) {
+  .form {
+    background-color: white;
+    border-radius: 0.3rem;
+    padding-bottom: 19px;
+    width: 90%;
+  }
+}
+@media (min-width: 768px) {
+  .form {
+    background-color: white;
+    border-radius: 0.3rem;
+    padding-bottom: 19px;
+    min-width: 30%;
+  }
+}
+
+.logo {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 15px;
 }
 .headerquote {
   padding: 20px;
@@ -33,7 +58,7 @@
   display: flex;
 }
 .errorSpan {
-  font-size: small;
+  font-size: smaller;
   color: red;
 }
 .passwordInput {
@@ -49,4 +74,13 @@
 .passwordIcon {
   width: 16px;
   cursor: pointer;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

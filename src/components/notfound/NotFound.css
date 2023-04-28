@@ -1,0 +1,10 @@
+.container404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 30px;
+  font-weight: bolder;
+  color: white;
+  background-color: #2b3336;
+}

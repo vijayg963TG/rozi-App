@@ -81,7 +81,7 @@ const Signup = () => {
       <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
           <div>
-            <img src='/assets/images/Rozi roti-logos.jpeg' className='logo' />
+            <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
           </div>
           <div className='headerquote'>We believe in Serving the best to our Customer !</div>
         </div>

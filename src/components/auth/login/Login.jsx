@@ -41,7 +41,7 @@ const Login = () => {
       <form onSubmit={formik.handleSubmit} className='loginform'>
         <div className='formHeader'>
           <div>
-            <img src='/assets/images/Rozi roti-logos.jpeg' className='logo' />
+            <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
           </div>
           <div className='headerquote'>Login Here !</div>
         </div>

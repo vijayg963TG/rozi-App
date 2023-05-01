@@ -20,16 +20,18 @@ const MobileDashboard = () => {
     <div>
       <div className='subcontainer'>
         <div className='qrcodescannersectionMobile'>
-          <img src='/assets/images/Rozi roti-logos.jpeg' className='dashboradlogo' />
+          <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
           <span className='userinformationssectionspanMobile'>Hey User</span>
 
           {showScanner && (
-            <QrReader
-              delay={100}
-              onError={handleError}
-              onScan={handleScan}
-              style={{ width: '80%', height: '80%' }}
-            />
+            <div className='qrreader'>
+              <QrReader
+                delay={100}
+                onError={handleError}
+                onScan={handleScan}
+                style={{ width: '80%', height: '80%' }}
+              />
+            </div>
           )}
 
           {<Modal />}
@@ -39,10 +41,7 @@ const MobileDashboard = () => {
               <span className='qrcodescannersectionspanMobile'>
                 Click the button below and Scan the QR Code
               </span>
-              <button
-                className='qrcodescannersectionbtnMobile'
-                onClick={() => setShowScanner(true)}
-              >
+              <button className='qrcodescannersectionbtn' onClick={() => setShowScanner(true)}>
                 open the scanner
                 <img src='/assets/images/qr-code.gif' className='qrcodescannersectiongif' />
               </button>{' '}

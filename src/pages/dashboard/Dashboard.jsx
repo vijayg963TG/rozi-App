@@ -28,23 +28,29 @@ const Dashboard = () => {
         <div>
           <div className='subcontainer'>
             <div className='userinformationssection'>
-              <img src='/assets/images/Rozi roti-logos.jpeg' className='dashboradlogo' />
+              <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
               <span className='userinformationssectionspan'>Hey User !</span>
               <span>Your User ID</span>
             </div>
             <div className='qrcodescannersection'>
               {<Modal />}
-              {showScanner && <QrReader delay={100} onError={handleError} onScan={handleScan} />}
+              {showScanner && (
+                <QrReader
+                  delay={100}
+                  onError={handleError}
+                  onScan={handleScan}
+                  style={{ width: '80%', height: '80%' }}
+                />
+              )}
               {showScanner === false && (
                 <>
-                  {' '}
                   <span className='qrcodescannersectionspan'>
                     Click the button below and Scan the QR Code
                   </span>
                   <button className='qrcodescannersectionbtn' onClick={() => setShowScanner(true)}>
                     open the scanner
                     <img src='/assets/images/qr-code.gif' className='qrcodescannersectiongif' />
-                  </button>{' '}
+                  </button>
                 </>
               )}
             </div>

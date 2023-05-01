@@ -33,7 +33,8 @@
   font-weight: 800;
 }
 
-.qrcodescannersection {
+.qrcodescannersection,
+.qrcodescannersectionMobile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,10 +42,7 @@
   width: 70%;
 }
 .qrcodescannersectionMobile {
-  display: flex;
-  flex-direction: column;
-  padding-top: 100px;
-  align-items: center;
+  margin-bottom: 100px;
   width: 100%;
 }
 .qrcodescannersectionbtn {
@@ -52,7 +50,7 @@
   min-width: 250px;
   width: 30%;
   border-radius: 0.3rem;
-  border-color: 1px solid white;
+  border: 1px solid white;
   font-size: large;
   font-weight: 900;
   background-color: rgb(25, 96, 189);
@@ -61,27 +59,12 @@
   display: flex;
   justify-content: center;
 }
-.qrcodescannersectionbtnMobile {
-  height: 50px;
-  min-width: 250px;
-  width: 30%;
-  border-radius: 0.3rem;
-  border-color: 1px solid white;
-  font-size: large;
-  font-weight: 900;
-  background-color: rgb(25, 96, 189);
-  color: white;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
 .qrcodescannersectionbtn:hover {
   height: 50px;
   min-width: 250px;
   width: 30%;
   border-radius: 0.3rem;
-  border-color: 1px solid rgb(25, 96, 189) !important;
+  border: 1px solid rgb(25, 96, 189);
   font-size: large;
   font-weight: 900;
   background-color: white;
@@ -90,27 +73,17 @@
   display: flex;
   justify-content: center;
 }
-.qrcodescannersectionbtnMobile:hover {
-  height: 50px;
-  min-width: 250px;
-  width: 30%;
-  border-radius: 0.3rem;
-  border-color: 1px solid rgb(25, 96, 189) !important;
-  font-size: large;
-  font-weight: 900;
-  background-color: white;
-  color: rgb(25, 96, 189);
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-.qrcodescannersectionspan {
+.qrcodescannersectionspan,
+.qrcodescannersectionspanMobile {
   margin-bottom: 40px;
   font-size: large;
   font-weight: 400;
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
+}
+.qrcodescannersectionspanMobile {
+  margin-top: 20px;
 }
 .qrcodescannersectiongif {
   padding-left: 15px;
@@ -124,7 +97,6 @@
   padding: 5px;
   width: 150px;
   border-radius: 50%;
-  margin-right: 15px;
 }
 .userinformationssectionspan {
   margin-top: 20px;
@@ -133,12 +105,10 @@
   margin-top: 40px;
   font-size: 20px;
 }
-.qrcodescannersectionspanMobile {
-  margin-bottom: 40px;
-  font-size: large;
-  font-weight: 400;
-  text-align: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-top: 20px;
+
+.qrreader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import '../signup/Signup.css';
@@ -7,6 +6,7 @@ import './Login.css';
 import { useState } from 'react';
 import InputField from '../../input/InputField';
 import Button from '../../button/Button';
+import { Link } from 'react-router-dom';
 
 const validate = yup.object().shape({
   email: yup
@@ -94,6 +94,16 @@ const Login = () => {
             </span>
             <span className='errorSpan'>{formik.touched.password && formik.errors.password}</span>
             <Button button={'Login'} role='Submit' />
+
+            <div className='formfooter'>
+<span>
+   {  `Don't have an account ?` }</span>
+             <Link to='/signup'>
+              <span className='formfooterlinkspan' >
+                Sign up
+              </span>
+             </Link>
+            </div>
           </div>
         </div>
       </form>

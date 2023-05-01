@@ -6,6 +6,7 @@ import './Signup.css';
 import { passwordpattern } from '../../../utils/pattern';
 import { useState } from 'react';
 import Button from '../../button/Button';
+import { Link } from 'react-router-dom';
 
 const validate = yup.object().shape({
   firstname: yup
@@ -83,7 +84,7 @@ const Signup = () => {
           <div>
             <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
           </div>
-          <div className='headerquote'>We believe in Serving the best to our Customer !</div>
+          <div className='headerquote'>We believe in Serving the best to our Customers !</div>
         </div>
         <div className='inputcontainer'>
           <div>
@@ -209,6 +210,14 @@ const Signup = () => {
             </span>
 
             <Button button={'Signup'} role='Submit' />
+            <div className='formfooter'>
+             Already have an account ?
+             <Link to='/login'>
+              <span className='formfooterlinkspan' >
+                Sign in instead
+              </span>
+             </Link>
+            </div>
           </div>
         </div>
       </form>

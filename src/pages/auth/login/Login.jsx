@@ -4,8 +4,8 @@ import * as yup from 'yup';
 import '../signup/Signup.css';
 import './Login.css';
 import { useState } from 'react';
-import InputField from '../../input/InputField';
-import Button from '../../button/Button';
+import InputField from '../../../components/input/InputField';
+import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
 
 const validate = yup.object().shape({
@@ -93,16 +93,18 @@ const Login = () => {
               )}
             </span>
             <span className='errorSpan'>{formik.touched.password && formik.errors.password}</span>
-            <Button button={'Login'} role='Submit' />
+            <div className='forgetusername'>
+              <Link to='/forgotpassword'>
+                <span className='forgetusernamespan'> Forget Password </span>
+              </Link>
+            </div>
+            <Button button={'Login'} />
 
             <div className='formfooter'>
-<span>
-   {  `Don't have an account ?` }</span>
-             <Link to='/signup'>
-              <span className='formfooterlinkspan' >
-                Sign up
-              </span>
-             </Link>
+              <span>{`Don't have an account ?`}</span>
+              <Link to='/signup'>
+                <span className='formfooterlinkspan'>Sign up</span>
+              </Link>
             </div>
           </div>
         </div>

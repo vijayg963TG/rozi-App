@@ -36,3 +36,14 @@
   border-radius: 50%;
   margin-right: 15px;
 }
+.forgetusername {
+  color: red;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 3px;
+  font-size: small;
+  color: #2b3336;
+}
+.forgetusernamespan {
+  color: #2b3336;
+}

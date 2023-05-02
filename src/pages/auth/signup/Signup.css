@@ -59,6 +59,8 @@
 .errorSpan {
   font-size: smaller;
   color: red;
+  max-width: 300px;
+  padding-top: 1px;
 }
 .passwordInput {
   position: relative;
@@ -82,15 +84,15 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.formfooter{
+.formfooter {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 15px;
   color: #2b3336;
 }
-.formfooterlinkspan{
+.formfooterlinkspan {
   color: #2b3336;
-  padding-left:5px;
+  padding-left: 5px;
   font-weight: 600;
 }

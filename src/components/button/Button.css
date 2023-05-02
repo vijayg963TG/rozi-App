@@ -1,13 +1,11 @@
 .btncontainer {
-  /* mt-10 flex w-full justify-center space-x-2 */
   margin-top: 40px;
   display: flex;
   width: 100%;
   justify-content: center;
 }
 .btn {
-  /* 'mb-2 flex w-full items-center justify-center rounded bg-darkblue px-6 py-2.5 font-poppins */
-  /* text-base font-medium text-white ' */
+  display: flex;
   width: 100%;
   border: 2px solid white;
   color: white;
@@ -23,4 +21,7 @@
   color: #2b3336;
   background-color: white;
   border: 2px solid #2b3336;
+}
+.loader {
+  margin-top: 7px;
 }

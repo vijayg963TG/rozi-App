@@ -3,7 +3,8 @@ import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
 import QrReader from 'react-qr-scanner';
 import { useState } from 'react';
-import Modal from '../../components/modal/Modal';
+import { Link } from 'react-router-dom';
+
 const Dashboard = () => {
   const [result, setResult] = useState('');
   console.log(result);
@@ -17,15 +18,15 @@ const Dashboard = () => {
   const handleError = (err) => {
     console.error(err);
   };
-  
   return (
     <div className='dashboardcontainer'>
       {width <= 768 ? (
-          <div>
+        <div>
           <div className='subcontainer'>
             <div className='qrcodescannersectionMobile'>
               <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
               <span className='userinformationssectionspanMobile'>Hey User</span>
+
               {showScanner && (
                 <div className='qrreader'>
                   <QrReader
@@ -36,7 +37,7 @@ const Dashboard = () => {
                   />
                 </div>
               )}
-              {<Modal />}
+
               {showScanner === false && (
                 <>
                   <span className='qrcodescannersectionspanMobile'>
@@ -48,6 +49,12 @@ const Dashboard = () => {
                   </button>
                 </>
               )}
+              <div className='resetpasswordlinMobile'>
+                <Link to={'/resetpassword'}>
+                  {' '}
+                  <span className='resetpasswordlinkspanMobile'>Change/Reset Password ! </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -58,9 +65,14 @@ const Dashboard = () => {
               <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
               <span className='userinformationssectionspan'>Hey User !</span>
               <span>Your User ID</span>
+              <div className='resetpasswordlink'>
+                <Link to={'/resetpassword'}>
+                  {' '}
+                  <span className='resetpasswordlinkspan'>Change/Reset Password </span>
+                </Link>
+              </div>
             </div>
             <div className='qrcodescannersection'>
-              {<Modal />}
               {showScanner && (
                 <QrReader
                   delay={100}

@@ -93,7 +93,6 @@
 .dashboradlogo {
   border: 1px solid white;
   background-color: white;
-  border-radius: 2px;
   padding: 5px;
   width: 150px;
   border-radius: 50%;
@@ -105,10 +104,21 @@
   margin-top: 40px;
   font-size: 20px;
 }
-
 .qrreader {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 300px;
+}
+.resetpasswordlink {
+  padding-top: 15px;
+}
+.resetpasswordlinkspan {
+  color: white;
+}
+.resetpasswordlinMobile {
+  margin-top: 50px;
+}
+.resetpasswordlinkspanMobile {
+  color: rgb(25, 96, 189);
 }

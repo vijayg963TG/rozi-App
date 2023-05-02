@@ -11,6 +11,11 @@ const StyledSVGIcon = styled(ReactSVG)`
         width: ${size};
         height: ${size};
       `}
+    ${({ radius }) =>
+      radius &&
+      css`
+        border-radius: ${radius};
+      `}
     ${({ transform }) =>
       transform &&
       css`
@@ -36,6 +41,7 @@ const Icon = (props) => {
       src={`${src}${props.name}.svg`}
       color={props.color}
       size={props.size}
+      radius={props.radius}
       transform={props.transform}
       className={props?.class}
     />

@@ -1,10 +1,18 @@
 import React from 'react';
 import './Button.css';
+import Icon from '../Icon/Icon';
 const Button = ({ button }) => {
+  const loading = false;
   return (
     <div className='btncontainer'>
       <button type='submit' className='btn'>
-        {button}
+        {loading ? (
+          <>
+            <span>Loading</span> <Icon name='loader' size={'32px'} class='loader' />
+          </>
+        ) : (
+          button
+        )}
       </button>
     </div>
   );

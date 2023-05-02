@@ -1,11 +1,11 @@
 import React from 'react';
-import InputField from '../../input/InputField';
+import InputField from '../../../components/input/InputField';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import './Signup.css';
 import { passwordpattern } from '../../../utils/pattern';
 import { useState } from 'react';
-import Button from '../../button/Button';
+import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
 
 const validate = yup.object().shape({
@@ -28,7 +28,10 @@ const validate = yup.object().shape({
   password: yup
     .string()
     .min(6, 'Password should contain atleast 6 characters*')
-    .matches(passwordpattern, 'Password must be strong*')
+    .matches(
+      passwordpattern,
+      'Password must be strong must contain a special character a digit a uppercase and lowercase letter *'
+    )
     .required('Password is a required field*'),
   mobile_number: yup
     .string()
@@ -188,7 +191,9 @@ const Signup = () => {
                 />
               )}
             </span>
-            <span className='errorSpan'>{formik.touched.password && formik.errors.password}</span>
+            <div className='errorSpan'>
+              <span>{formik.touched.password && formik.errors.password}</span>
+            </div>
           </div>
           <div className='passwordInput'>
             <InputField
@@ -211,12 +216,10 @@ const Signup = () => {
 
             <Button button={'Signup'} role='Submit' />
             <div className='formfooter'>
-             Already have an account ?
-             <Link to='/login'>
-              <span className='formfooterlinkspan' >
-                Sign in instead
-              </span>
-             </Link>
+              Already have an account ?
+              <Link to='/login'>
+                <span className='formfooterlinkspan'>Sign in instead</span>
+              </Link>
             </div>
           </div>
         </div>

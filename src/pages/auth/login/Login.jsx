@@ -15,7 +15,7 @@ const validate = yup.object().shape({
     .required('Email is a required field*'),
   password: yup
     .string()
-    .min(6, 'Password should contain atleast 6 characters*')
+    .min(6, 'Password must be of atleast 6 characters*')
     .required('This is a required field*')
 });
 

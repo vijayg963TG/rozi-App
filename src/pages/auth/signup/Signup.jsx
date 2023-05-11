@@ -21,6 +21,9 @@ const validate = yup.object().shape({
     .max(12)
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
     .required('This is a Required field*'),
+    companyname: yup
+    .string()
+    .required('This is a Required field*'),
   email: yup
     .string()
     .email('email should be required format*')
@@ -60,6 +63,7 @@ const Signup = () => {
     initialValues: {
       email: '',
       password: '',
+      companyname:'',
       confirmnewpassword: '',
       firstname: '',
       lastname: '',
@@ -123,6 +127,21 @@ const Signup = () => {
               }
             />
             <span className='errorSpan'>{formik.touched.lastname && formik.errors.lastname}</span>
+          </div>
+          <div>
+            <InputField
+              type='text'
+              name='companyname'
+              label='Company Name'
+              value={formik.values.companyname}
+              onBlur={formik.handleBlur}
+              placeholder='Please Enter your Company Name'
+              onChange={formik.handleChange}
+              className={
+                formik.touched.companyname && formik.errors.companyname ? 'InputFieldError' : 'InputField'
+              }
+            />
+            <span className='errorSpan'>{formik.touched.companyname && formik.errors.companyname}</span>
           </div>
           <div>
             <InputField

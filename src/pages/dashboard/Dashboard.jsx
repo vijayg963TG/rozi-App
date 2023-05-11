@@ -33,7 +33,7 @@ const Dashboard = () => {
                     delay={100}
                     onError={handleError}
                     onScan={handleScan}
-                    style={{ width: '80%', height: '80%' }}
+                    style={{ width: '80%', height: '80%'}}
                   />
                 </div>
               )}

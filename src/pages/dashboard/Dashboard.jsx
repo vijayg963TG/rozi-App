@@ -1,7 +1,7 @@
 import React from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
-import QrReader from 'react-qr-scanner';
+import QrScanner from 'react-qr-scanner';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { useEffect } from 'react';
@@ -47,6 +47,7 @@ const Dashboard = () => {
   //     navigate('/login');
   //   }
   // }, []);
+
   return (
     <div className='dashboardcontainer'>
       {width <= 768 ? (
@@ -58,14 +59,14 @@ const Dashboard = () => {
 
               {showScanner && (
                 <div className='qrreader'>
-                  <QrReader
+                  <QrScanner
                     delay={100}
                     onScan={handleScan}
                     onError={handleError}
                     constraints={{
-                      video: { facingMode: "environment" }
+                      video: { facingMode: 'environment' }
                     }}
-                    style={{ width: '80%', height: '80%' }}
+                    style={{ width: '95%', height: '95%' }}
                   />
                 </div>
               )}
@@ -106,10 +107,13 @@ const Dashboard = () => {
             </div>
             <div className='qrcodescannersection'>
               {showScanner && (
-                <QrReader
+                <QrScanner
                   delay={100}
                   onError={handleError}
                   onScan={handleScan}
+                  constraints={{
+                    video: { facingMode: 'environment' }
+                  }}
                   style={{ width: '80%', height: '80%' }}
                 />
               )}

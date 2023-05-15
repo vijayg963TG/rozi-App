@@ -11,8 +11,6 @@ const ROOT_URL = getRootUrl();
 
 // userlogin
 export const userLogin = (data) => async (dispatch) => {
-  console.log(dispatch);
-  console.log(data);
   const Url = `${ROOT_URL}/login`;
   const body = {
     user: {
@@ -23,6 +21,7 @@ export const userLogin = (data) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(Url, body);
+    console.log(response.headers.authorization);
     dispatch(setStatusCode(response.data.status.code));
     if (response.data.status.code == 200) {
       dispatch(setSuccessMessage(response.data.status.message));

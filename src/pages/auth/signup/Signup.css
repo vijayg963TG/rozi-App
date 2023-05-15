@@ -98,26 +98,24 @@ input::-webkit-inner-spin-button {
   padding-left: 5px;
   font-weight: 600;
 }
-.successmessage{
+.successmessage {
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   color: green;
   padding-top: 10px;
-
 }
-.errormessage{
-    text-align: center;
-   display: flex;
-   max-width: 300px;
-   justify-content: center;
-   align-items: center;
-   color: red;
-   padding-top: 10px;
-
+.errormessage {
+  text-align: center;
+  display: flex;
+  max-width: 300px;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  padding-top: 10px;
 }
-.successsignupspan{
+.successsignupspan {
   padding-left: 3px;
   padding-right: 3px;
   text-decoration: underline;

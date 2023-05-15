@@ -1,9 +1,10 @@
 import React from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
-import QrReader from 'react-qr-scanner';
+import { QrReader } from 'react-qr-reader';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+// import { useEffect } from 'react';
 
 const Dashboard = () => {
   const [result, setResult] = useState('');
@@ -18,6 +19,34 @@ const Dashboard = () => {
   const handleError = (err) => {
     console.error(err);
   };
+  // useEffect(() => {
+  //   const token = localStorage.getItem('beast_usertoken');
+  //   if (token) {
+  //     try {
+  //       if (token == null) {
+  //         navigate('/login');
+  //         return;
+  //       } else {
+  //         const decodedToken = jwtDecode(token);
+  //         if (decodedToken) {
+  //           if (decodedToken.exp * 1000 > Date.now()) {
+  //             dispatch(setClearData());
+  //             navigate('/login');
+  //             return;
+  //           } else {
+  //             dispatch(setTokenData(decodedToken));
+  //           }
+  //         } else {
+  //           navigate('/login');
+  //         }
+  //       }
+  //     } catch (error) {
+  //       navigate('/login');
+  //     }
+  //   } else {
+  //     navigate('/login');
+  //   }
+  // }, []);
   return (
     <div className='dashboardcontainer'>
       {width <= 768 ? (
@@ -30,10 +59,11 @@ const Dashboard = () => {
               {showScanner && (
                 <div className='qrreader'>
                   <QrReader
+                    facingMode={'environment'}
                     delay={100}
                     onError={handleError}
                     onScan={handleScan}
-                    style={{ width: '80%', height: '80%'}}
+                    style={{ width: '80%', height: '80%' }}
                   />
                 </div>
               )}

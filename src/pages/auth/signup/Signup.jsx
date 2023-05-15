@@ -23,9 +23,7 @@ const validate = yup.object().shape({
     .max(12)
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
     .required('This is a Required field*'),
-    companyname: yup
-    .string()
-    .required('This is a Required field*'),
+  companyname: yup.string().required('This is a Required field*'),
   email: yup
     .string()
     .email('email should be required format*')
@@ -61,22 +59,22 @@ const Signup = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-  const dispatch = useDispatch()
-  const {loading,error,successMessage,statusCode} =  useSelector((state)=>state.signup)
-  
-const disableInput  = statusCode == 200 ? true : false
+  const dispatch = useDispatch();
+  const { loading, error, successMessage, statusCode } = useSelector((state) => state.signup);
+
+  const disableInput = statusCode == 200 ? true : false;
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
-      companyname:'',
+      companyname: '',
       confirmpassword: '',
       firstname: '',
       lastname: '',
       mobile_number: ''
     },
     onSubmit: (values) => {
-      dispatch(userSignup(values))
+      dispatch(userSignup(values));
       console.log(values);
     },
     validateOnChange: true,
@@ -147,11 +145,15 @@ const disableInput  = statusCode == 200 ? true : false
               placeholder='Please Enter your Company Name'
               onChange={formik.handleChange}
               className={
-                formik.touched.companyname && formik.errors.companyname ? 'InputFieldError' : 'InputField'
+                formik.touched.companyname && formik.errors.companyname
+                  ? 'InputFieldError'
+                  : 'InputField'
               }
               disable={disableInput}
             />
-            <span className='errorSpan'>{formik.touched.companyname && formik.errors.companyname}</span>
+            <span className='errorSpan'>
+              {formik.touched.companyname && formik.errors.companyname}
+            </span>
           </div>
           <div>
             <InputField
@@ -246,31 +248,27 @@ const disableInput  = statusCode == 200 ? true : false
             <span className='errorSpan'>
               {formik.touched.confirmpassword && formik.errors.confirmpassword}
             </span>
-            </div>
-            <Button button={'Signup'} loading={loading} />
-            <div>
-            {
-              successMessage && !error &&<div className='successmessage'>{successMessage}</div>
-            }
-            {
-              error &&<div className='errormessage'>
-                {
-                  error
-                }
-                </div>
-            }
-            </div>
-            <div className='formfooter'>
-              {
-                statusCode == 200 ? <Link to='/login'>
+          </div>
+          <Button button={'Signup'} loading={loading} />
+          <div>
+            {successMessage && !error && <div className='successmessage'>{successMessage}</div>}
+            {error && <div className='errormessage'>{error}</div>}
+          </div>
+          <div className='formfooter'>
+            {statusCode == 200 ? (
+              <Link to='/login'>
                 <span className='formfooterlinkspan'>Sign in to continue</span>
-              </Link> :<> Already have an account ?  <Link to='/login'>
-                <span className='formfooterlinkspan'>Sign in instead</span>
-              </Link></>
-              }
-             
-            </div>
-         
+              </Link>
+            ) : (
+              <>
+                {' '}
+                Already have an account ?{' '}
+                <Link to='/login'>
+                  <span className='formfooterlinkspan'>Sign in instead</span>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </form>
     </div>

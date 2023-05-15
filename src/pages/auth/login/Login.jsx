@@ -25,30 +25,29 @@ const validate = yup.object().shape({
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);    
+    setPasswordShown(passwordShown ? false : true);
   };
-  const dispatch = useDispatch()
-  const {loading,error,statusCode} = useSelector((state)=>state.login)
+  const dispatch = useDispatch();
+  const { loading, error, statusCode } = useSelector((state) => state.login);
   const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     onSubmit: (values) => {
-      dispatch(userLogin(values))
+      dispatch(userLogin(values));
     },
     validateOnChange: true,
     validationSchema: validate
   });
-  const navigate = useNavigate()
-useEffect(()=>{
-if (statusCode == 200) {
-navigate('/')
-}
-else{
-  return
-}
-},[navigate,statusCode])
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (statusCode == 200) {
+      navigate('/');
+    } else {
+      return;
+    }
+  }, [navigate, statusCode]);
   return (
     <div className='logincontainer'>
       <form onSubmit={formik.handleSubmit} className='loginform'>
@@ -111,24 +110,15 @@ else{
                 <span className='forgetusernamespan'> Forget Password </span>
               </Link>
             </div>
-            </div>
-            <Button button={'Login'} loading={loading}/>
-            <div>
-            {
-              error &&<div className='errormessage'>
-                {
-                  error
-                }
-                </div>
-            }
-            </div>
-            <div className='formfooter'>
-              <span>{`Don't have an account ?`}</span>
-              <Link to='/signup'>
-                <span className='formfooterlinkspan'>Sign up</span>
-              </Link>
-            </div>
-         
+          </div>
+          <Button button={'Login'} loading={loading} />
+          <div>{error && <div className='errormessage'>{error}</div>}</div>
+          <div className='formfooter'>
+            <span>{`Don't have an account ?`}</span>
+            <Link to='/signup'>
+              <span className='formfooterlinkspan'>Sign up</span>
+            </Link>
+          </div>
         </div>
       </form>
     </div>

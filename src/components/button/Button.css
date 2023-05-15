@@ -1,12 +1,13 @@
 .btncontainer {
   margin-top: 40px;
   display: flex;
+ 
   width: 100%;
   justify-content: center;
 }
 .btn {
   display: flex;
-  width: 100%;
+  width: 320px;
   border: 2px solid white;
   color: white;
   background-color: #2b3336;
@@ -16,6 +17,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.3rem;
+}
+@media (max-width: 367px) {
+  .btn {
+    width: 270px;
+  }
 }
 .btn:hover {
   color: #2b3336;

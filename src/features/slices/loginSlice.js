@@ -1,27 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
+    user:null,
     loading:false,
-    data:null,
-    error:null
-};
-const loginSlice = createSlice({
-name:'user_login',
-initialState,
-reducers:{
-    setLoading(state,action){
-        state.loading = action.payload;
-    },
-    setUser(state,action){
-        state.loading = false;
-        state.error = null;
-        state.data = action.payload;
-    },
-    setError(state,action){
-        state.error = action.payload
-        state.data = null;
-        state.loading = null;
-    }
+    error:null,
+    statusCode:'',
+    successMessage:null,
 }
+const loginReducer = createSlice({
+    name:'user_Login',
+    initialState,
+    reducers:{
+        setLoading(state,action){
+            state.loading = action.payload
+        },
+        setStatusCode(state,action){
+            state.statusCode = action.payload;
+        },
+        setSuccessMessage(state,action){
+            state.successMessage = action.payload
+        },
+        setUser(state, action) {
+            state.loading = false;
+            state.user = action.payload;
+            state.error = null;
+          },
+          setError(state, action) {
+            state.error = action.payload;
+            state.user = null;
+            state.loading = false;
+          },
+    },
+    extraReducers: {}
 });
-export const {setLoading,setError,setUser} = loginSlice.actions;
-export default loginSlice.reducer;
+
+export const { setLoading, setError, setStatusCode,setUser,setSuccessMessage} = loginReducer.actions;
+export default loginReducer.reducer;

@@ -6,7 +6,10 @@ import './Login.css';
 import { useState } from 'react';
 import InputField from '../../../components/input/InputField';
 import Button from '../../../components/button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../../../api/userLoginAPi';
+import { useEffect } from 'react';
 
 const validate = yup.object().shape({
   email: yup
@@ -22,20 +25,30 @@ const validate = yup.object().shape({
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
+    setPasswordShown(passwordShown ? false : true);    
   };
+  const dispatch = useDispatch()
+  const {loading,error,statusCode} = useSelector((state)=>state.login)
   const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(userLogin(values))
     },
     validateOnChange: true,
     validationSchema: validate
   });
-
+  const navigate = useNavigate()
+useEffect(()=>{
+if (statusCode == 200) {
+navigate('/')
+}
+else{
+  return
+}
+},[navigate,statusCode])
   return (
     <div className='logincontainer'>
       <form onSubmit={formik.handleSubmit} className='loginform'>
@@ -98,15 +111,24 @@ const Login = () => {
                 <span className='forgetusernamespan'> Forget Password </span>
               </Link>
             </div>
-            <Button button={'Login'} />
-
+            </div>
+            <Button button={'Login'} loading={loading}/>
+            <div>
+            {
+              error &&<div className='errormessage'>
+                {
+                  error
+                }
+                </div>
+            }
+            </div>
             <div className='formfooter'>
               <span>{`Don't have an account ?`}</span>
               <Link to='/signup'>
                 <span className='formfooterlinkspan'>Sign up</span>
               </Link>
             </div>
-          </div>
+         
         </div>
       </form>
     </div>

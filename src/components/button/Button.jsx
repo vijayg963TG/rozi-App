@@ -1,8 +1,8 @@
 import React from 'react';
 import './Button.css';
 import Icon from '../Icon/Icon';
-const Button = ({ button }) => {
-  const loading = false;
+const Button = ({ button,loading }) => {
+
   return (
     <div className='btncontainer'>
       <button type='submit' className='btn'>

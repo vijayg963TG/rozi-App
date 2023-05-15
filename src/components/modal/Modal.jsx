@@ -14,35 +14,33 @@ export default function Modal() {
       navigate('/');
     }, 7000);
   });
-  const loading= false ;
+  const loading = false;
   return (
     <>
       {modal && (
         <div className='modal'>
           <div className='overlay'>
-            {
-              loading && <div className='loader'>
-              <Icon name='loader' size='200px'/>
-                </div>
-            }
-            
+            {loading && (
+              <div className='loader'>
+                <Icon name='loader' size='200px' />
+              </div>
+            )}
           </div>
-          {
-          !loading && <div className='modal-content'>
-            <img src='/assets/images/success2.gif' className='successgif' />
-            <p className='successtext'>
-              You are Successfully Identified Press{' '}
-              <Link to='/'>
-               
-                <span className='okspan'>OK</span>
-              </Link>
-              to go to home page or you will be automatically redirected
-            </p>
-            <button className='close-modal' onClick={toggleModal}>
-              CLOSE
-            </button>
-          </div>
-          }
+          {!loading && (
+            <div className='modal-content'>
+              <img src='/assets/images/success2.gif' className='successgif' />
+              <p className='successtext'>
+                You are Successfully Identified Press{' '}
+                <Link to='/'>
+                  <span className='okspan'>OK</span>
+                </Link>
+                to go to home page or you will be automatically redirected
+              </p>
+              <button className='close-modal' onClick={toggleModal}>
+                CLOSE
+              </button>
+            </div>
+          )}
         </div>
       )}
     </>

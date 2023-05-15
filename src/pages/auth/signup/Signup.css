@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  background-image: url('/public//assets//images/bg.jpg');
+  background-size: cover;
+  color: black;
+  min-height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.inputcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+}
+.formHeader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-size: medium;
+}
+@media (max-width: 767px) {
+  .form {
+    background-color: white;
+    border-radius: 0.3rem;
+    padding-bottom: 19px;
+    width: 90%;
+  }
+}
+@media (min-width: 768px) {
+  .form {
+    background-color: white;
+    border-radius: 0.3rem;
+    padding-bottom: 19px;
+    min-width: 30%;
+  }
+}
+
+.logo {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.headerquote {
+  padding: 20px;
+  align-items: center;
+  text-align: center;
+  font-size: large;
+  font-weight: 800;
+  display: flex;
+}
+.errorSpan {
+  font-size: smaller;
+  color: red;
+  max-width: 300px;
+  padding-top: 1px;
+}
+.passwordInput {
+  position: relative;
+}
+.passwordIconSpan {
+  position: absolute;
+  right: 20px;
+  top: 52px;
+  align-items: center;
+}
+.passwordIcon {
+  width: 16px;
+  cursor: pointer;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.formfooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+  color: #2b3336;
+}
+.formfooterlinkspan {
+  color: #2b3336;
+  padding-left: 5px;
+  font-weight: 600;
+}
+.successmessage{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: green;
+  padding-top: 10px;
+
+}
+.errormessage{
+    text-align: center;
+   display: flex;
+   max-width: 300px;
+   justify-content: center;
+   align-items: center;
+   color: red;
+   padding-top: 10px;
+
+}
+.successsignupspan{
+  padding-left: 3px;
+  padding-right: 3px;
+  text-decoration: underline;
+}

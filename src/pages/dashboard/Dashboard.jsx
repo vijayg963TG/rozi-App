@@ -1,7 +1,7 @@
 import React from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
-import { QrReader } from 'react-qr-reader';
+import QrReader from 'react-qr-scanner';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { useEffect } from 'react';
@@ -59,10 +59,12 @@ const Dashboard = () => {
               {showScanner && (
                 <div className='qrreader'>
                   <QrReader
-                    facingMode={'environment'}
                     delay={100}
-                    onError={handleError}
                     onScan={handleScan}
+                    onError={handleError}
+                    constraints={{
+                      video: { facingMode: "environment" }
+                    }}
                     style={{ width: '80%', height: '80%' }}
                   />
                 </div>

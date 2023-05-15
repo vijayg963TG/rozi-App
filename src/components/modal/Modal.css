@@ -62,3 +62,15 @@
   color: red;
   text-decoration: none;
 }
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 191px;
+}
+.overlay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}

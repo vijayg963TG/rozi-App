@@ -3,50 +3,53 @@ import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
 import QrScanner from 'react-qr-scanner';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { useEffect } from 'react';
-
+import { Link,  useNavigate } from 'react-router-dom';
+import { setTokenData } from '../../features/slices/loginSlice';
+import { useDispatch } from 'react-redux';
+import jwtDecode from 'jwt-decode';
+import { useEffect } from 'react'
 const Dashboard = () => {
-  const [result, setResult] = useState('');
-  console.log(result);
   const [showScanner, setShowScanner] = useState(false);
   const [width] = useWindowSize();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleScan = (data) => {
     if (data) {
-      setResult(data);
+    navigate('/roziroti/qrscanned')
     }
   };
   const handleError = (err) => {
     console.error(err);
   };
-  // useEffect(() => {
-  //   const token = localStorage.getItem('beast_usertoken');
-  //   if (token) {
-  //     try {
-  //       if (token == null) {
-  //         navigate('/login');
-  //         return;
-  //       } else {
-  //         const decodedToken = jwtDecode(token);
-  //         if (decodedToken) {
-  //           if (decodedToken.exp * 1000 > Date.now()) {
-  //             dispatch(setClearData());
-  //             navigate('/login');
-  //             return;
-  //           } else {
-  //             dispatch(setTokenData(decodedToken));
-  //           }
-  //         } else {
-  //           navigate('/login');
-  //         }
-  //       }
-  //     } catch (error) {
-  //       navigate('/login');
-  //     }
-  //   } else {
-  //     navigate('/login');
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('user_token');
+    if (token) {
+      try {
+        if (token == null) {
+          navigate('/login');
+          return;
+        } else {
+          const decodedToken = jwtDecode(token);
+          console.log(decodedToken)
+          if (decodedToken) {
+            if (decodedToken.exp < Date.now()/1000) {
+              navigate('/login');
+              return;
+            } else {
+              dispatch(setTokenData(decodedToken));
+            }
+          } else {
+            navigate('/login');
+          }
+        }
+      } catch (error) {
+        navigate('/login');
+      }
+    } else {
+      navigate('/login');
+    }
+  }, []);
 
   return (
     <div className='dashboardcontainer'>
@@ -60,7 +63,6 @@ const Dashboard = () => {
               {showScanner && (
                 <div className='qrreader'>
                   <QrScanner
-                    delay={100}
                     onScan={handleScan}
                     onError={handleError}
                     constraints={{
@@ -108,7 +110,7 @@ const Dashboard = () => {
             <div className='qrcodescannersection'>
               {showScanner && (
                 <QrScanner
-                  delay={100}
+                  // delay={100}
                   onError={handleError}
                   onScan={handleScan}
                   constraints={{

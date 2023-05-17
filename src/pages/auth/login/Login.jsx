@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../../api/userLoginAPi';
 import { useEffect } from 'react';
-
+import jwtDecode from 'jwt-decode'
 const validate = yup.object().shape({
   email: yup
     .string()
@@ -28,26 +28,34 @@ const Login = () => {
     setPasswordShown(passwordShown ? false : true);
   };
   const dispatch = useDispatch();
-  const { loading, error, statusCode } = useSelector((state) => state.login);
+  const { loading, error } = useSelector((state) => state.login);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     onSubmit: (values) => {
-      dispatch(userLogin(values));
+      dispatch(userLogin(values,navigate));
     },
     validateOnChange: true,
     validationSchema: validate
   });
-  const navigate = useNavigate();
+
   useEffect(() => {
-    if (statusCode == 200) {
-      navigate('/');
-    } else {
-      return;
+    const token = localStorage.getItem('user_token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken)
+        if (decodedToken && (decodedToken.exp  >  Date.now()/1000)){
+          navigate('/');
+        }
+      } catch (error) {
+        navigate('/login');
+      }
     }
-  }, [navigate, statusCode]);
+  },[]);
   return (
     <div className='logincontainer'>
       <form onSubmit={formik.handleSubmit} className='loginform'>
@@ -71,6 +79,7 @@ const Login = () => {
               className={
                 formik.touched.email && formik.errors.email ? 'InputFieldError' : 'InputField'
               }
+              disable={loading}
             />
             <span className='errorSpan'>{formik.touched.email && formik.errors.email}</span>
           </div>
@@ -86,6 +95,7 @@ const Login = () => {
               className={
                 formik.touched.password && formik.errors.password ? 'InputFieldError' : 'InputField'
               }
+              disable={loading}
             />
             <span className='passwordIconSpan'>
               {passwordShown ? (

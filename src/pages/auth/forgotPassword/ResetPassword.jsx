@@ -36,8 +36,12 @@ const validate = yup.object().shape({
 
 const ResetPassword = () => {
   const [passwordShown, setPasswordShown] = useState(false);
+  const [newpasswordShown, setNewPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+  };
+  const toggleNewPasswordVisiblity = () => {
+    setNewPasswordShown(newpasswordShown ? false : true);
   };
   const formik = useFormik({
     initialValues: {
@@ -100,7 +104,7 @@ const ResetPassword = () => {
           </div>
           <div className='passwordInput'>
             <InputField
-              type={passwordShown ? 'text' : 'password'}
+              type={newpasswordShown ? 'text' : 'password'}
               name='newpassword'
               value={formik.values.newpassword}
               label='New Password'
@@ -114,18 +118,18 @@ const ResetPassword = () => {
               }
             />
             <span className='passwordIconSpan'>
-              {passwordShown ? (
+              {newpasswordShown ? (
                 <img
                   src='/assets/icons/eye.png'
                   className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
+                  onClick={toggleNewPasswordVisiblity}
                   role='showpassword'
                 />
               ) : (
                 <img
                   src='/assets/icons/password.svg'
                   className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
+                  onClick={toggleNewPasswordVisiblity}
                   role='hidepassword'
                 />
               )}

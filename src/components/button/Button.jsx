@@ -1,13 +1,13 @@
 import React from 'react';
 import './Button.css';
 import Icon from '../Icon/Icon';
-const Button = ({ button, loading }) => {
+const Button = ({ button,loading }) => {
   return (
     <div className='btncontainer'>
-      <button type='submit' className='btn'>
+      <button type='submit' className='btn' disabled={loading}>
         {loading ? (
           <>
-            <span>Loading</span> <Icon name='loader' size={'32px'} class='loader' />
+            <span></span> <Icon name='loader' size={'45px'} class='loader' />
           </>
         ) : (
           button

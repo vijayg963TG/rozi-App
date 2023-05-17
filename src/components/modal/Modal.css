@@ -33,6 +33,12 @@
   color: rgb(32, 135, 43);
   text-align: center;
 }
+.errortext {
+  font-size: large;
+  color: red;
+  text-align: center;
+}
+
 .successgif {
   height: 50%;
   width: 80%;
@@ -61,8 +67,16 @@
 .okspan {
   color: red;
   text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
 }
-.loader {
+.okspanerror {
+  color: green;
+  text-decoration: none;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.modalloader {
   display: flex;
   justify-content: center;
   align-items: center;

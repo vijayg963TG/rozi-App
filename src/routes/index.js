@@ -8,7 +8,6 @@ import NotFound from '../pages/notfound/NotFound';
 import Dashboard from '../pages/dashboard/Dashboard';
 import AfterScan from '../pages/afterScanPage/AfterScan';
 import ResetPassword from '../pages/auth/forgotPassword/ResetPassword';
-
 const Routes = () => {
   const content = useRoutes([
     {

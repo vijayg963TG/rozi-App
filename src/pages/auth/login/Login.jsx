@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../../api/userLoginAPi';
 import { useEffect } from 'react';
-import jwtDecode from 'jwt-decode'
+import jwtDecode from 'jwt-decode';
 const validate = yup.object().shape({
   email: yup
     .string()
@@ -36,7 +36,7 @@ const Login = () => {
       password: ''
     },
     onSubmit: (values) => {
-      dispatch(userLogin(values,navigate));
+      dispatch(userLogin(values, navigate));
     },
     validateOnChange: true,
     validationSchema: validate
@@ -47,15 +47,14 @@ const Login = () => {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken)
-        if (decodedToken && (decodedToken.exp  >  Date.now()/1000)){
+        if (decodedToken && decodedToken.exp > Date.now() / 1000) {
           navigate('/');
         }
       } catch (error) {
         navigate('/login');
       }
     }
-  },[]);
+  }, []);
   return (
     <div className='logincontainer'>
       <form onSubmit={formik.handleSubmit} className='loginform'>

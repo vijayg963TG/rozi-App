@@ -5,7 +5,7 @@ const initialState = {
   error: null,
   statusCode: '',
   successMessage: null,
-  tokenData:null,
+  tokenData: null
 };
 const loginReducer = createSlice({
   name: 'user_Login',
@@ -30,13 +30,13 @@ const loginReducer = createSlice({
       state.user = null;
       state.loading = false;
     },
-    setTokenData(state,action){
-      state.tokenData = action.payload
+    setTokenData(state, action) {
+      state.tokenData = action.payload;
     }
   },
   extraReducers: {}
 });
 
-export const { setLoading, setError, setStatusCode, setUser, setSuccessMessage,setTokenData } =
+export const { setLoading, setError, setStatusCode, setUser, setSuccessMessage, setTokenData } =
   loginReducer.actions;
 export default loginReducer.reducer;

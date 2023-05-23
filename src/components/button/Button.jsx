@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.css';
 import Icon from '../Icon/Icon';
-const Button = ({ button,loading }) => {
+const Button = ({ button, loading }) => {
   return (
     <div className='btncontainer'>
       <button type='submit' className='btn' disabled={loading}>

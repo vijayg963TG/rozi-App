@@ -3,7 +3,7 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
-  statusCode: '',
+  statusCode: ''
 };
 const afterScanReducer = createSlice({
   name: 'user_Login',
@@ -24,12 +24,10 @@ const afterScanReducer = createSlice({
       state.error = action.payload;
       state.user = null;
       state.loading = false;
-    },
-   
+    }
   },
   extraReducers: {}
 });
 
-export const { setLoading, setError, setStatusCode, setUser } =
-  afterScanReducer.actions;
+export const { setLoading, setError, setStatusCode, setUser } = afterScanReducer.actions;
 export default afterScanReducer.reducer;

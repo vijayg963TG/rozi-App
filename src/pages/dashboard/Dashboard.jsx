@@ -3,20 +3,28 @@ import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
 import QrScanner from 'react-qr-scanner';
 import { useState } from 'react';
-import { Link,  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setTokenData } from '../../features/slices/loginSlice';
 import { useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import { setData } from '../../features/slices/dashboardSlice';
+import { userScanning } from '../../api/afterScanApi';
+
 const Dashboard = () => {
   const [showScanner, setShowScanner] = useState(false);
   const [width] = useWindowSize();
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const correctScanUrl = 'https://qr-code-fronted.vercel.app/roziroti/qrscanned';
   const handleScan = (data) => {
     if (data) {
-    navigate('/roziroti/qrscanned')
+      if (data.text == correctScanUrl) {
+        const token = localStorage.getItem('user_token');
+        dispatch(setData(data));
+        dispatch(userScanning(token));
+        navigate('/roziroti/qrscanned');
+      }
     }
   };
   const handleError = (err) => {
@@ -31,9 +39,9 @@ const Dashboard = () => {
           return;
         } else {
           const decodedToken = jwtDecode(token);
-          console.log(decodedToken)
           if (decodedToken) {
-            if (decodedToken.exp < Date.now()/1000) {
+            if (decodedToken.exp < Date.now() / 1000) {
+              console.log('expired otk');
               navigate('/login');
               return;
             } else {
@@ -50,7 +58,7 @@ const Dashboard = () => {
       navigate('/login');
     }
   }, []);
-
+  const userName = localStorage.getItem('userdata');
   return (
     <div className='dashboardcontainer'>
       {width <= 768 ? (
@@ -58,7 +66,7 @@ const Dashboard = () => {
           <div className='subcontainer'>
             <div className='qrcodescannersectionMobile'>
               <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
-              <span className='userinformationssectionspanMobile'>Hey User</span>
+              <span className='userinformationssectionspanMobile'>Hey {userName}</span>
 
               {showScanner && (
                 <div className='qrreader'>
@@ -68,7 +76,7 @@ const Dashboard = () => {
                     constraints={{
                       video: { facingMode: 'environment' }
                     }}
-                    style={{ width: '95%', height: '95%' }}
+                    style={{ width: '90%', height: '90%' }}
                   />
                 </div>
               )}
@@ -98,8 +106,7 @@ const Dashboard = () => {
           <div className='subcontainer'>
             <div className='userinformationssection'>
               <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
-              <span className='userinformationssectionspan'>Hey User !</span>
-              <span>Your User ID</span>
+              <span className='userinformationssectionspan'>Hey {userName}</span>
               <div className='resetpasswordlink'>
                 <Link to={'/resetpassword'}>
                   {' '}

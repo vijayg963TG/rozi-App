@@ -8,7 +8,7 @@
   color: black;
   height: 100vh;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .loginform {
     background-color: white;
     border-radius: 0.3rem;

@@ -21,7 +21,6 @@ export const userLogin = (data, navigate) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     const response = await axios.post(Url, body);
-    console.log(response);
     dispatch(setStatusCode(response.status));
     if (response.status == 200) {
       localStorage.setItem('user_token', response.data.data.token);
@@ -31,7 +30,6 @@ export const userLogin = (data, navigate) => async (dispatch) => {
       navigate('/');
     }
   } catch (error) {
-    console.log(error);
     dispatch(setError(error.response.data));
   }
 };

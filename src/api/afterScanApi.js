@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { getRootUrl } from './getRootUrl';
 const ROOT_URL = getRootUrl();
-
 import { setError, setUser, setLoading } from '../features/slices/afterScanSlice';
 
 //after qr scan
@@ -33,10 +32,12 @@ export const userScanning = (token) => async (dispatch) => {
     const response = await axios.post(Url, null, {
       headers: { Authorization: token }
     });
+    console.log(response);
     if (response) {
       dispatch(setUser(response.data));
     }
   } catch (error) {
+    console.log(error);
     dispatch(setError(error.response.data.error));
   }
 };

@@ -3,11 +3,9 @@ import '../dashboard/Dashboard.css';
 import Modal from '../../components/modal/Modal';
 import './AfterScan.css';
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { userScanning } from '../../api/afterScanApi';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 const AfterScan = () => {
-  const dispatch = useDispatch();
   const { loading, error, user } = useSelector((state) => state.afterScan);
   const { data } = useSelector((state) => state.dashboard);
   const navigate = useNavigate();
@@ -15,11 +13,7 @@ const AfterScan = () => {
   useEffect(() => {
     const token = localStorage.getItem('user_token');
     if (token && data) {
-      try {
-        dispatch(userScanning(token));
-      } catch (error) {
-        console.log(error);
-      }
+      console.log('valid user');
     } else {
       navigate('/');
     }

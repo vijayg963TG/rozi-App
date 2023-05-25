@@ -12,21 +12,16 @@ import { passwordpattern } from '../../../utils/pattern';
 const validate = yup.object().shape({
   newpassword: yup
     .string()
+    .min(6, 'Password should contain atleast 6 characters*')
     .matches(
       passwordpattern,
       'Password must be strong must contain a special character a digit a uppercase and lowercase letter *'
     )
-    .min(6, 'Password should contain atleast 6 characters*')
     .required('This is a required field*'),
   confirmnewpassword: yup
     .string()
-    .when('newpassword', {
-      is: (value) => (value || value > 0 ? true : false),
-      then: yup
-        .string()
-        .oneOf([yup.ref('password')], 'Please retype your password. They do not match*')
-    })
-    .required('This is a required fields*')
+    .oneOf([yup.ref('newpassword'), null], 'Please retype your password. They do not match*')
+    .required('This is a required field*')
 });
 
 const NewPassword = () => {
@@ -63,7 +58,7 @@ const NewPassword = () => {
               value={formik.values.newpassword}
               label='New Password'
               onBlur={formik.handleBlur}
-              placeholder='Please Enter your newpassword'
+              placeholder='Please Enter your New Password'
               onChange={formik.handleChange}
               className={
                 formik.touched.newpassword && formik.errors.newpassword
@@ -96,7 +91,7 @@ const NewPassword = () => {
           </div>
           <div>
             <InputField
-              type='text'
+              type='password'
               name='confirmnewpassword'
               label=' Confirm Password'
               value={formik.values.confirmnewpassword}
@@ -112,7 +107,8 @@ const NewPassword = () => {
             <span className='errorSpan'>
               {formik.touched.confirmnewpassword && formik.errors.confirmnewpassword}
             </span>
-
+          </div>
+          <div>
             <Button button={'Continue'} />
             <div className='formfooter'>
               <span>{`Return to `}</span>

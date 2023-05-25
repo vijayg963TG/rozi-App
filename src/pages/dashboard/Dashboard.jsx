@@ -3,7 +3,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 import './Dashboard.css';
 import QrScanner from 'react-qr-scanner';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setTokenData } from '../../features/slices/loginSlice';
 import { useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
@@ -24,6 +24,8 @@ const Dashboard = () => {
         dispatch(setData(data));
         dispatch(userScanning(token));
         navigate('/roziroti/qrscanned');
+      } else {
+        navigate('/');
       }
     }
   };
@@ -41,7 +43,6 @@ const Dashboard = () => {
           const decodedToken = jwtDecode(token);
           if (decodedToken) {
             if (decodedToken.exp < Date.now() / 1000) {
-              console.log('expired otk');
               navigate('/login');
               return;
             } else {
@@ -93,10 +94,10 @@ const Dashboard = () => {
                 </>
               )}
               <div className='resetpasswordlinMobile'>
-                <Link to={'/resetpassword'}>
+                {/* <Link to={'/resetpassword'}>
                   {' '}
                   <span className='resetpasswordlinkspanMobile'>Change/Reset Password ! </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -108,16 +109,15 @@ const Dashboard = () => {
               <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
               <span className='userinformationssectionspan'>Hey {userName}</span>
               <div className='resetpasswordlink'>
-                <Link to={'/resetpassword'}>
+                {/* <Link to={'/resetpassword'}>
                   {' '}
                   <span className='resetpasswordlinkspan'>Change/Reset Password </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className='qrcodescannersection'>
               {showScanner && (
                 <QrScanner
-                  // delay={100}
                   onError={handleError}
                   onScan={handleScan}
                   constraints={{

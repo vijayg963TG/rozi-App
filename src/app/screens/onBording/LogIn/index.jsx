@@ -1,52 +1,40 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import '../signup/Signup.css';
-import './Login.css';
 import { useState } from 'react';
-import InputField from '../../../components/input/InputField';
-import Button from '../../../components/button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogin } from '../../../api/userLoginAPi';
 import { useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
-const validate = yup.object().shape({
-  email: yup
-    .string()
-    .email('email should be required format*')
-    .required('Email is a required field*'),
-  password: yup
-    .string()
-    .min(6, 'Password must be of atleast 6 characters*')
-    .required('This is a required field*')
-});
+import { loginValidate } from '../../../../utils/Schema';
+import Button from '../../../../components/button/Button';
+import InputField from '../../../../components/input/InputField';
+import { userLogin } from '../../../../api/userLoginAPi';
+import AuthContainer from '../../../../components/Hoc/authContainer/index';
+import { getTokenFromLS } from '../../../../utils/commonFuntion';
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.login);
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: 'vishal.singh@technogetic.com',
+      password: 'Vishal@123'
     },
     onSubmit: (values) => {
       dispatch(userLogin(values, navigate));
     },
     validateOnChange: true,
-    validationSchema: validate
+    validationSchema: loginValidate
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('user_token');
+    let token = getTokenFromLS();
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
         if (decodedToken && decodedToken.exp > Date.now() / 1000) {
           navigate('/');
         }
@@ -56,8 +44,8 @@ const Login = () => {
     }
   }, []);
   return (
-    <div className='logincontainer'>
-      <form onSubmit={formik.handleSubmit} className='loginform'>
+    <AuthContainer>
+      <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
           <div>
             <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
@@ -97,21 +85,12 @@ const Login = () => {
               disable={loading}
             />
             <span className='passwordIconSpan'>
-              {passwordShown ? (
-                <img
-                  src='/assets/icons/eye.png'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='showpassword'
-                />
-              ) : (
-                <img
-                  src='/assets/icons/password.svg'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='hidepassword'
-                />
-              )}
+              <img
+                src={`/assets/icons${passwordShown ? '/eye.png' : '/password.svg'}`}
+                className='passwordIcon'
+                onClick={() => setPasswordShown(!passwordShown)}
+                role='showpassword'
+              />
             </span>
             <span className='errorSpan'>{formik.touched.password && formik.errors.password}</span>
             <div className='forgetusername'>
@@ -121,7 +100,7 @@ const Login = () => {
             </div>
           </div>
           <Button button={'Login'} loading={loading} />
-          <div>{error && <div className='errormessage'>{error}</div>}</div>
+          <div>{error && <div className='errormessage'>{error.message}</div>}</div>
           <div className='formfooter'>
             <span>{`Don't have an account ?`}</span>
             <Link to='/signup'>
@@ -130,7 +109,7 @@ const Login = () => {
           </div>
         </div>
       </form>
-    </div>
+    </AuthContainer>
   );
 };
 

@@ -1,43 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import '../signup/Signup.css';
-import '../login/Login.css';
 import { useState } from 'react';
-import InputField from '../../../components/input/InputField';
-import Button from '../../../components/button/Button';
+import InputField from '../../../../components/input/InputField';
+import Button from '../../../../components/button/Button';
+import { resetPasswordValidate } from '../../../../utils/Schema';
 import { Link } from 'react-router-dom';
-import { passwordpattern } from '../../../utils/pattern';
-
-const validate = yup.object().shape({
-  password: yup
-    .string()
-    .min(6, 'Password should contain atleast 6 characters*')
-    .required('This is a required field*'),
-  newpassword: yup
-    .string()
-    .min(6, 'Password should contain atleast 6 characters*')
-    .matches(
-      passwordpattern,
-      'Password must be strong must contain a special character a digit a uppercase and lowercase letter *'
-    )
-    .required('This is a required field*'),
-
-  confirmnewpassword: yup
-    .string()
-    .oneOf([yup.ref('newpassword'), null], 'Please retype your password. They do not match*')
-    .required('This is a required field*')
-});
+import AuthContainer from '../../../../components/Hoc/authContainer';
 
 const ResetPassword = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [newpasswordShown, setNewPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
-  const toggleNewPasswordVisiblity = () => {
-    setNewPasswordShown(newpasswordShown ? false : true);
-  };
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -48,11 +20,11 @@ const ResetPassword = () => {
       console.log(values);
     },
     validateOnChange: true,
-    validationSchema: validate
+    validationSchema: resetPasswordValidate
   });
   return (
-    <div className='logincontainer'>
-      <form onSubmit={formik.handleSubmit} className='loginform'>
+    <AuthContainer>
+      <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
           <div>
             <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
@@ -74,25 +46,15 @@ const ResetPassword = () => {
               }
             />
             <span className='passwordIconSpan'>
-              {passwordShown ? (
-                <img
-                  src='/assets/icons/eye.png'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='showpassword'
-                />
-              ) : (
-                <img
-                  src='/assets/icons/password.svg'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='hidepassword'
-                />
-              )}
+              <img
+                src={`/assets/icons${passwordShown ? '/eye.png' : '/password.svg'}`}
+                className='passwordIcon'
+                onClick={() => setPasswordShown(!passwordShown)}
+                role='showpassword'
+              />
             </span>
 
             <div className='errorSpan'>
-              {' '}
               <span>{formik.touched.password && formik.errors.password}</span>
             </div>
           </div>
@@ -112,25 +74,15 @@ const ResetPassword = () => {
               }
             />
             <span className='passwordIconSpan'>
-              {newpasswordShown ? (
-                <img
-                  src='/assets/icons/eye.png'
-                  className='passwordIcon'
-                  onClick={toggleNewPasswordVisiblity}
-                  role='showpassword'
-                />
-              ) : (
-                <img
-                  src='/assets/icons/password.svg'
-                  className='passwordIcon'
-                  onClick={toggleNewPasswordVisiblity}
-                  role='hidepassword'
-                />
-              )}
+              <img
+                src={`/assets/icons${newpasswordShown ? '/eye.png' : '/password.svg'}`}
+                className='passwordIcon'
+                onClick={() => setNewPasswordShown(!newpasswordShown)}
+                role='showpassword'
+              />
             </span>
 
             <div className='errorSpan'>
-              {' '}
               <span>{formik.touched.newpassword && formik.errors.newpassword}</span>
             </div>
           </div>
@@ -164,7 +116,7 @@ const ResetPassword = () => {
           </div>
         </div>
       </form>
-    </div>
+    </AuthContainer>
   );
 };
 

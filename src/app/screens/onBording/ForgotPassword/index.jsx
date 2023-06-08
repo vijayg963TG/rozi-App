@@ -1,34 +1,31 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import '../signup/Signup.css';
-import '../login/Login.css';
-import InputField from '../../../components/input/InputField';
-import Button from '../../../components/button/Button';
-import { Link } from 'react-router-dom';
+import Button from '../../../../components/button/Button';
+import InputField from '../../../../components/input/InputField';
+import { Link, useNavigate } from 'react-router-dom';
+import { forgotValidate } from '../../../../utils/Schema';
+import AuthContainer from '../../../../components/Hoc/authContainer';
+import { useDispatch } from 'react-redux';
+import { forgotPassword } from '../../../../api/forgotPasswordApi';
 
-const validate = yup.object().shape({
-  email: yup
-    .string()
-    .email('Email should be required format*')
-    .required('Email is a required field*')
-});
-
-const ForgotPassword = () => {
+const ForgotPasword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: ''
     },
     onSubmit: (values) => {
       console.log(values);
+      dispatch(forgotPassword(values, navigate));
     },
     validateOnChange: true,
-    validationSchema: validate
+    validationSchema: forgotValidate
   });
 
   return (
-    <div className='logincontainer'>
-      <form onSubmit={formik.handleSubmit} className='loginform'>
+    <AuthContainer>
+      <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
           <div>
             <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
@@ -63,8 +60,8 @@ const ForgotPassword = () => {
           </div>
         </div>
       </form>
-    </div>
+    </AuthContainer>
   );
 };
 
-export default ForgotPassword;
+export default ForgotPasword;

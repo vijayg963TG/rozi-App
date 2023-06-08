@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { getRootUrl } from './getRootUrl';
-const ROOT_URL = getRootUrl();
+const ROOT_URL = getBaseUrl();
 import { setError, setUser, setLoading } from '../features/slices/afterScanSlice';
+import { getBaseUrl } from '../utils/commonFuntion';
 
 //after qr scan
 // export const userScanned = (token) => async (dispatch) => {

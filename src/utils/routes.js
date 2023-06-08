@@ -1,13 +1,14 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
-import ForgotPassword from '../pages/auth/forgotPassword/ForgotPassword';
-import NewPassword from '../pages/auth/forgotPassword/NewPassword';
-import Login from '../pages/auth/login/Login';
-import Signup from '../pages/auth/signup/Signup';
+import NewPassword from '../app/screens/onBording/NewPassword';
+import Login from '../app/screens/onBording/LogIn/index';
 import NotFound from '../pages/notfound/NotFound';
 import Dashboard from '../pages/dashboard/Dashboard';
 import AfterScan from '../pages/afterScanPage/AfterScan';
-import ResetPassword from '../pages/auth/forgotPassword/ResetPassword';
+import ResetPassword from '../app/screens/onBording/ResetPassword';
+import Signup from '../app/screens/onBording/Signup';
+import ForgotPassword from '../app/screens/onBording/ForgotPassword';
+
 const Routes = () => {
   const content = useRoutes([
     {

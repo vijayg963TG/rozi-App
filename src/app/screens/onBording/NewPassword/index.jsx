@@ -1,33 +1,16 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import '../signup/Signup.css';
-import '../login/Login.css';
 import { useState } from 'react';
-import InputField from '../../../components/input/InputField';
-import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
-import { passwordpattern } from '../../../utils/pattern';
-
-const validate = yup.object().shape({
-  newpassword: yup
-    .string()
-    .min(6, 'Password should contain atleast 6 characters*')
-    .matches(
-      passwordpattern,
-      'Password must be strong must contain a special character a digit a uppercase and lowercase letter *'
-    )
-    .required('This is a required field*'),
-  confirmnewpassword: yup
-    .string()
-    .oneOf([yup.ref('newpassword'), null], 'Please retype your password. They do not match*')
-    .required('This is a required field*')
-});
+import InputField from '../../../../components/input/InputField';
+import Button from '../../../../components/button/Button';
+import { newPasswordValidate } from '../../../../utils/Schema';
+import AuthContainer from '../../../../components/Hoc/authContainer';
 
 const NewPassword = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
+    setPasswordShown(!passwordShown);
   };
   const formik = useFormik({
     initialValues: {
@@ -38,12 +21,12 @@ const NewPassword = () => {
       console.log(values);
     },
     validateOnChange: true,
-    validationSchema: validate
+    validationSchema: newPasswordValidate
   });
 
   return (
-    <div className='logincontainer'>
-      <form onSubmit={formik.handleSubmit} className='loginform'>
+    <AuthContainer>
+      <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
           <div>
             <img src='/assets/images/roziroti-logos.jpeg' className='logo' />
@@ -119,7 +102,7 @@ const NewPassword = () => {
           </div>
         </div>
       </form>
-    </div>
+    </AuthContainer>
   );
 };
 

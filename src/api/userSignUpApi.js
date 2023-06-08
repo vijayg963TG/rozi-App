@@ -1,14 +1,12 @@
 import axios from 'axios';
-import { getRootUrl } from './getRootUrl';
+import { getBaseUrl } from '../utils/commonFuntion';
 import {
   setError,
   setLoading,
   setStatusCode,
   setSuccessMessage
 } from '../features/slices/signupSlice';
-const ROOT_URL = getRootUrl();
-
-//  user signup
+const ROOT_URL = getBaseUrl();
 
 export const userSignup = (data) => async (dispatch) => {
   const Url = `${ROOT_URL}/signup`;

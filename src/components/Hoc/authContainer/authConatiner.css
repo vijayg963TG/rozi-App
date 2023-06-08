@@ -1,15 +1,35 @@
 .container {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  background-image: url('/public//assets//images/bg.jpg');
+  background-image: url('/public//assets//images/rozi.svg');
   background-size: cover;
-  color: black;
   min-height: 100vh;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 1.2rem;
 }
+
+.logo {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+.forgetusername {
+  color: red;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+  font-size: 14px;
+  color: #2b3336;
+}
+
+.forgetusernamespan {
+  color: #2b3336;
+}
+
 .inputcontainer {
   display: flex;
   flex-direction: column;
@@ -22,56 +42,40 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
   font-size: medium;
 }
-@media (max-width: 767px) {
-  .form {
-    background-color: white;
-    border-radius: 0.3rem;
-    padding-bottom: 19px;
-    width: 90%;
-  }
-}
-@media (min-width: 768px) {
-  .form {
-    background-color: white;
-    border-radius: 0.3rem;
-    padding-bottom: 19px;
-    min-width: 30%;
-  }
+
+.formHeader img {
+  text-align: center;
 }
 
-.logo {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 150px;
-  border-radius: 50%;
-  margin-right: 15px;
+.form {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  padding: 1.2rem;
+  min-width: 30%;
 }
+
 .headerquote {
-  padding: 20px;
   align-items: center;
-  text-align: center;
+  padding: 1.2rem 0;
   font-size: large;
   font-weight: 800;
-  display: flex;
+  color: #2b3336;
 }
 .errorSpan {
   font-size: smaller;
   color: red;
+  padding-top: 4px;
   max-width: 300px;
-  padding-top: 1px;
 }
 .passwordInput {
   position: relative;
 }
 .passwordIconSpan {
   position: absolute;
-  right: 10px;
-  top: 52px;
-  align-items: center;
+  right: 12px;
+  top: 50px;
 }
 .passwordIcon {
   width: 16px;

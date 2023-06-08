@@ -1,58 +1,13 @@
 import React from 'react';
-import InputField from '../../../components/input/InputField';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-import './Signup.css';
-import { passwordpattern } from '../../../utils/pattern';
 import { useState } from 'react';
-import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSignup } from '../../../api/userSignUpApi';
-
-const validate = yup.object().shape({
-  firstname: yup
-    .string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
-    .min(3)
-    .max(12)
-    .required(' This is a Required field*'),
-  lastname: yup
-    .string()
-    .min(3)
-    .max(12)
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
-    .required('This is a Required field*'),
-  companyname: yup.string().required('This is a Required field*'),
-  email: yup
-    .string()
-    .email('email should be required format*')
-    .required('Email is a required field*'),
-  password: yup
-    .string()
-    .min(6, 'Password should contain atleast 6 characters*')
-    .matches(
-      passwordpattern,
-      'Password must be strong must contain a special character a digit a uppercase and lowercase letter *'
-    )
-    .required('Password is a required field*'),
-  mobile_number: yup
-    .string()
-    .max(10, 'Mobile number should be of 10 digits')
-    .min(10, 'Mobile number should be of 10 digits')
-    .matches(/^[0-9]+$/, 'Mobile number must be numeric')
-    .required('This is a required field*'),
-
-  confirmpassword: yup
-    .string()
-    .when('password', {
-      is: (value) => (value || value > 0 ? true : false),
-      then: yup
-        .string()
-        .oneOf([yup.ref('password')], 'Please retype your password. They do not match*')
-    })
-    .required('This is a required fields*')
-});
+import { userSignup } from '../../../../api/userSignUpApi';
+import Button from '../../../../components/button/Button';
+import InputField from '../../../../components/input/InputField';
+import { signUpValidate } from '../../../../utils/Schema';
+import AuthContainer from '../../../../components/Hoc/authContainer';
 
 const Signup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -71,14 +26,14 @@ const Signup = () => {
       confirmpassword: '',
       firstname: '',
       lastname: '',
-      mobile_number: ''
+      mobileNumber: ''
     },
     onSubmit: (values) => {
       dispatch(userSignup(values));
       console.log(values);
     },
     validateOnChange: true,
-    validationSchema: validate
+    validationSchema: signUpValidate
   });
   const handleKeyPress = (e) => {
     if (e.keyCode === 69 || e.keyCode === 190 || e.keyCode === 107 || e.keyCode === 189) {
@@ -87,10 +42,10 @@ const Signup = () => {
       e.preventDefault();
     }
   };
-  formik.values.mobile_number = formik.values.mobile_number.toString();
+  formik.values.mobileNumber = formik.values.mobileNumber.toString();
 
   return (
-    <div className='container'>
+    <AuthContainer>
       <form onSubmit={formik.handleSubmit} className='form'>
         <div className='formHeader'>
           <div>
@@ -261,8 +216,7 @@ const Signup = () => {
               </Link>
             ) : (
               <>
-                {' '}
-                Already have an account ?{' '}
+                Already have an account ?
                 <Link to='/login'>
                   <span className='formfooterlinkspan'>Sign in instead</span>
                 </Link>
@@ -271,7 +225,7 @@ const Signup = () => {
           </div>
         </div>
       </form>
-    </div>
+    </AuthContainer>
   );
 };
 

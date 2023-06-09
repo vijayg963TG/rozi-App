@@ -19,8 +19,8 @@ const Login = () => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      email: 'vishal.singh@technogetic.com',
-      password: 'Vishal@123'
+      email: '',
+      password: ''
     },
     onSubmit: (values) => {
       dispatch(userLogin(values, navigate));

@@ -8,7 +8,7 @@ import AuthContainer from '../../../../components/Hoc/authContainer';
 import { useDispatch } from 'react-redux';
 import { forgotPassword } from '../../../../api/forgotPasswordApi';
 
-const ForgotPasword = () => {
+const ForgotPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -64,4 +64,4 @@ const ForgotPasword = () => {
   );
 };
 
-export default ForgotPasword;
+export default ForgotPassword;

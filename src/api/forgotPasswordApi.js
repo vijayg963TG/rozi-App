@@ -1,24 +1,23 @@
-import axios from 'axios';
-import { getBaseUrl } from '../utils/commonFuntion';
 import { Alert } from '../utils/Alert';
 import endPoints from '../constant/endPoints';
-const ROOT_URL = getBaseUrl();
+import { api } from '../utils/api';
 
-// userlogin
-export const forgotPassword = (data, navigate) => async (dispatch) => {
-  const Url = `${ROOT_URL}${endPoints.sendMail}`;
-
+export const forgotPassword = (values, navigate) => async (dispatch) => {
   try {
-    dispatch(Alert(1));
-    Alert(3);
-    const response = await axios.post(Url, data);
-    if (response.status == 200) {
-      console.log(response);
-      Alert(1, response.data.message);
-      navigate('/');
-    }
+    api.postApiCall(
+      endPoints.sendMail,
+      values,
+      (response) => {
+        console.log(response);
+        Alert(1, response.data.message);
+        dispatch();
+        navigate('/');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   } catch (error) {
-    console.log(error);
     Alert(2);
   }
 };

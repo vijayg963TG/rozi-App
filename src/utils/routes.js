@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import NewPassword from '../app/screens/onBording/NewPassword';
 import Login from '../app/screens/onBording/LogIn/index';
-import NotFound from '../pages/notfound/NotFound';
-import Dashboard from '../pages/dashboard/Dashboard';
-import AfterScan from '../pages/afterScanPage/AfterScan';
 import ResetPassword from '../app/screens/onBording/ResetPassword';
 import Signup from '../app/screens/onBording/Signup';
-import ForgotPassword from '../app/screens/onBording/ForgotPassword';
+import ForgotPassword from '../app/screens/onBording/forgotPassword';
+import NotFound from '../app/screens/notfound/NotFound';
+import Dashboard from '../app/screens/Dashboard/Dashboard';
+import AfterScan from '../app/screens/afterScanPage/AfterScan';
+import { GlobalLoader } from '../components/globalLoader';
 
 const Routes = () => {
   const content = useRoutes([
     {
       path: '/',
-      element: <Dashboard />
+      element: <Suspense fallback={<GlobalLoader />}>{<Dashboard />}</Suspense>
     },
     {
       path: '/roziroti/qrscanned',
-      element: <AfterScan />
+      element: <Suspense fallback={<GlobalLoader />}>{<AfterScan />}</Suspense>
     },
     {
       path: '/signup',
-      element: <Signup />
+      element: (
+        <Suspense fallback={<GlobalLoader />}>
+          <Signup />
+        </Suspense>
+      )
     },
     {
       path: '/login',
-      element: <Login />
+      element: (
+        <Suspense fallback={<GlobalLoader />}>
+          <Login />
+        </Suspense>
+      )
     },
     {
       path: '/forgotpassword',

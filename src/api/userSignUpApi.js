@@ -1,35 +1,38 @@
-import axios from 'axios';
-import { getBaseUrl } from '../utils/commonFuntion';
 import {
   setError,
   setLoading,
   setStatusCode,
   setSuccessMessage
 } from '../features/slices/signupSlice';
-const ROOT_URL = getBaseUrl();
+import endPoints from '../constant/endPoints';
+import { Alert } from '../utils/Alert';
+import { api } from '../utils/api';
 
-export const userSignup = (data) => async (dispatch) => {
-  const Url = `${ROOT_URL}/signup`;
-  const body = {
-    user: {
-      first_name: data.firstname,
-      last_name: data.lastname,
-      company_name: data.companyname,
-      password_confirmation: data.confirmpassword,
-      password: data.password,
-      email: data.email,
-      mobile_number: data.mobile_number
-    }
-  };
+export const userSignup = (values, navigate) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    const response = await axios.post(Url, body);
-    dispatch(setStatusCode(response.data.status.code));
-    if (response.data.status.code == 200) {
-      dispatch(setSuccessMessage(response.data.status.message));
-    }
+    api.postApiCall(
+      endPoints.create,
+      values,
+      (response) => {
+        console.log(response);
+        const { message } = response.data;
+        Alert(1, message);
+        dispatch(setSuccessMessage(message));
+        dispatch(setStatusCode(response.status));
+        dispatch(setLoading(false));
+        navigate('/login');
+      },
+      (err) => {
+        const { message } = err.response.data.error;
+        console.log(message);
+        Alert(2, message);
+        dispatch(setLoading(false));
+      }
+    );
   } catch (error) {
-    dispatch(setStatusCode(error.response.data.status.code));
-    dispatch(setError(error.response.data.status.message));
+    Alert(2, error);
+    dispatch(setLoading(false));
+    dispatch(setError(error));
   }
 };

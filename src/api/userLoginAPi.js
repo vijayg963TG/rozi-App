@@ -1,39 +1,39 @@
-import axios from 'axios';
 import {
   setLoading,
   setError,
-  setStatusCode
-  // setUser,
-  // setSuccessMessage
+  setStatusCode,
+  setTokenData,
+  setSuccessMessage
 } from '../features/slices/loginSlice';
-import { getBaseUrl } from '../utils/commonFuntion';
 import { Alert } from '../utils/Alert';
-const ROOT_URL = getBaseUrl();
+import endPoints from '../constant/endPoints';
+import { api } from '../utils/api';
+import { setTokenFromLS } from '../utils/commonFuntion';
 
-// userlogin
-export const userLogin = (data, navigate) => async (dispatch) => {
-  const Url = `${ROOT_URL}/login`;
-  const body = {
-    email: data.email,
-    password: data.password
-  };
+export const userLogin = (values, navigate) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    Alert(3);
-    const response = await axios.post(Url, body);
-    dispatch(setStatusCode(response.status));
-    if (response.status == 200) {
-      console.log(response);
-      Alert(1, response.data.message);
-      localStorage.setItem('user_token', response.data.token);
-      // localStorage.setItem('userdata', response.data.user.first_name);
-      // dispatch(setSuccessMessage(response.data.status.message));
-      // dispatch(setUser(response.data));
-      navigate('/');
-    }
+    api.postApiCall(
+      endPoints.login,
+      values,
+      (response) => {
+        const { token, message } = response.data;
+        setTokenFromLS(token);
+        Alert(1, message);
+        dispatch(setSuccessMessage(message));
+        dispatch(setTokenData(token));
+        dispatch(setStatusCode(response.status));
+        dispatch(setLoading(false));
+        navigate('/');
+      },
+      (res) => {
+        Alert(2, res.response.data.message);
+        dispatch(setLoading(false));
+      }
+    );
   } catch (error) {
-    console.log(error);
-    Alert(2);
-    dispatch(setError(error.response.data));
+    Alert(2, error.data.message);
+    dispatch(setLoading(false));
+    dispatch(setError(error));
   }
 };

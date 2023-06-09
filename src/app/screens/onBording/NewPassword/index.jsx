@@ -9,9 +9,6 @@ import AuthContainer from '../../../../components/Hoc/authContainer';
 
 const NewPassword = () => {
   const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(!passwordShown);
-  };
   const formik = useFormik({
     initialValues: {
       newpassword: '',
@@ -50,25 +47,15 @@ const NewPassword = () => {
               }
             />
             <span className='passwordIconSpan'>
-              {passwordShown ? (
-                <img
-                  src='/assets/icons/eye.png'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='showpassword'
-                />
-              ) : (
-                <img
-                  src='/assets/icons/password.svg'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='hidepassword'
-                />
-              )}
+              <img
+                src={`/assets/icons${passwordShown ? '/eye.png' : '/password.svg'}`}
+                className='passwordIcon'
+                onClick={() => setPasswordShown(!passwordShown)}
+                role='showpassword'
+              />
             </span>
 
             <div className='errorSpan'>
-              {' '}
               <span>{formik.touched.newpassword && formik.errors.newpassword}</span>
             </div>
           </div>

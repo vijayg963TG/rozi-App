@@ -1,15 +1,16 @@
 import React from 'react';
-import useWindowSize from '../../hooks/useWindowSize';
-import './Dashboard.css';
+import './dashboard.css';
 import QrScanner from 'react-qr-scanner';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { setTokenData } from '../../features/slices/loginSlice';
+import { setUser } from '../../../features/slices/loginSlice';
 import { useDispatch } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import { useEffect } from 'react';
-import { setData } from '../../features/slices/dashboardSlice';
-import { userScanning } from '../../api/afterScanApi';
+import { setData } from '../../../features/slices/dashboardSlice';
+import { getTokenFromLS } from '../../../utils/commonFuntion';
+import { userScanning } from '../../../api/afterScanApi';
+import useWindowSize from '../../../utils/useWindowSize';
 
 const Dashboard = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -20,7 +21,7 @@ const Dashboard = () => {
   const handleScan = (data) => {
     if (data) {
       if (data.text == correctScanUrl) {
-        const token = localStorage.getItem('user_token');
+        const token = getTokenFromLS();
         dispatch(setData(data));
         dispatch(userScanning(token));
         navigate('/roziroti/qrscanned');
@@ -33,7 +34,7 @@ const Dashboard = () => {
     console.error(err);
   };
   useEffect(() => {
-    const token = localStorage.getItem('user_token');
+    const token = getTokenFromLS();
     if (token) {
       try {
         if (token == null) {
@@ -41,12 +42,13 @@ const Dashboard = () => {
           return;
         } else {
           const decodedToken = jwtDecode(token);
+          console.log(decodedToken.userId);
           if (decodedToken) {
             if (decodedToken.exp < Date.now() / 1000) {
               navigate('/login');
               return;
             } else {
-              dispatch(setTokenData(decodedToken));
+              dispatch(setUser(decodedToken));
             }
           } else {
             navigate('/login');
@@ -91,6 +93,15 @@ const Dashboard = () => {
                     open the scanner
                     <img src='/assets/images/qr-code.gif' className='qrcodescannersectiongif' />
                   </button>
+
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate('/login');
+                    }}
+                  >
+                    Log Out
+                  </button>
                 </>
               )}
               <div className='resetpasswordlinMobile'>
@@ -134,6 +145,14 @@ const Dashboard = () => {
                   <button className='qrcodescannersectionbtn' onClick={() => setShowScanner(true)}>
                     open the scanner
                     <img src='/assets/images/qr-code.gif' className='qrcodescannersectiongif' />
+                  </button>
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate('/login');
+                    }}
+                  >
+                    Log Out
                   </button>
                 </>
               )}

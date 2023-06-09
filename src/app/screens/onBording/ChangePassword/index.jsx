@@ -7,12 +7,14 @@ import { resetPasswordValidate } from '../../../../utils/Schema';
 import { Link } from 'react-router-dom';
 import AuthContainer from '../../../../components/Hoc/authContainer';
 
-const ResetPassword = () => {
+const ChangePassword = () => {
+  const [passwordShown, setPasswordShown] = useState(false);
   const [newpasswordShown, setNewPasswordShown] = useState(false);
   const formik = useFormik({
     initialValues: {
-      newPassword: '',
-      confirmPassword: ''
+      password: '',
+      newpassword: '',
+      confirmnewpassword: ''
     },
     onSubmit: (values) => {
       console.log(values);
@@ -32,15 +34,41 @@ const ResetPassword = () => {
         <div className='inputcontainer'>
           <div className='passwordInput'>
             <InputField
+              type={passwordShown ? 'text' : 'password'}
+              name='password'
+              value={formik.values.password}
+              label='Password'
+              onBlur={formik.handleBlur}
+              placeholder='Please Enter your Password'
+              onChange={formik.handleChange}
+              className={
+                formik.touched.password && formik.errors.password ? 'InputFieldError' : 'InputField'
+              }
+            />
+            <span className='passwordIconSpan'>
+              <img
+                src={`/assets/icons${passwordShown ? '/eye.png' : '/password.svg'}`}
+                className='passwordIcon'
+                onClick={() => setPasswordShown(!passwordShown)}
+                role='showpassword'
+              />
+            </span>
+
+            <div className='errorSpan'>
+              <span>{formik.touched.password && formik.errors.password}</span>
+            </div>
+          </div>
+          <div className='passwordInput'>
+            <InputField
               type={newpasswordShown ? 'text' : 'password'}
-              name='newPassword'
-              value={formik.values.newPassword}
+              name='newpassword'
+              value={formik.values.newpassword}
               label='New Password'
               onBlur={formik.handleBlur}
               placeholder='Please Enter your New Password'
               onChange={formik.handleChange}
               className={
-                formik.touched.newPassword && formik.errors.newPassword
+                formik.touched.newpassword && formik.errors.newpassword
                   ? 'InputFieldError'
                   : 'InputField'
               }
@@ -55,26 +83,26 @@ const ResetPassword = () => {
             </span>
 
             <div className='errorSpan'>
-              <span>{formik.touched.newPassword && formik.errors.newPassword}</span>
+              <span>{formik.touched.newpassword && formik.errors.newpassword}</span>
             </div>
           </div>
           <div>
             <InputField
               type='text'
-              name='confirmPassword'
+              name='confirmnewpassword'
               label=' Confirm Password'
-              value={formik.values.confirmPassword}
+              value={formik.values.confirmnewpassword}
               onBlur={formik.handleBlur}
-              placeholder='Please Enter your Confirm Password'
+              placeholder='Please Enter your New Password'
               onChange={formik.handleChange}
               className={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
+                formik.touched.confirmnewpassword && formik.errors.confirmnewpassword
                   ? 'InputFieldError'
                   : 'InputField'
               }
             />
             <span className='errorSpan'>
-              {formik.touched.confirmPassword && formik.errors.confirmPassword}
+              {formik.touched.confirmnewpassword && formik.errors.confirmnewpassword}
             </span>
           </div>
           <div>
@@ -92,4 +120,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ChangePassword;

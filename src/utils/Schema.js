@@ -13,19 +13,19 @@ const loginValidate = yup.object().shape({
 });
 
 const signUpValidate = yup.object().shape({
-  firstname: yup
+  firstName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
     .min(3)
     .max(12)
     .required(' This is a Required field*'),
-  lastname: yup
+  lastName: yup
     .string()
     .min(3)
     .max(12)
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name*')
     .required('This is a Required field*'),
-  companyname: yup.string().required('This is a Required field*'),
+  companyName: yup.string().required('This is a Required field*'),
   email: yup
     .string()
     .email('email should be required format*')
@@ -45,7 +45,7 @@ const signUpValidate = yup.object().shape({
     .matches(/^[0-9]+$/, 'Mobile number must be numeric')
     .required('This is a required field*'),
 
-  confirmpassword: yup
+  confirmPassword: yup
     .string()
     .when('password', {
       is: (value) => (value || value > 0 ? true : false),
@@ -79,11 +79,7 @@ const newPasswordValidate = yup.object().shape({
 });
 
 const resetPasswordValidate = yup.object().shape({
-  password: yup
-    .string()
-    .min(6, 'Password should contain atleast 6 characters*')
-    .required('This is a required field*'),
-  newpassword: yup
+  newPassword: yup
     .string()
     .min(6, 'Password should contain atleast 6 characters*')
     .matches(
@@ -92,7 +88,7 @@ const resetPasswordValidate = yup.object().shape({
     )
     .required('This is a required field*'),
 
-  confirmnewpassword: yup
+  confirmPassword: yup
     .string()
     .oneOf([yup.ref('newpassword'), null], 'Please retype your password. They do not match*')
     .required('This is a required field*')

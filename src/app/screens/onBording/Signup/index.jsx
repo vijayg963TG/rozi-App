@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSignup } from '../../../../api/userSignUpApi';
 import Button from '../../../../components/button/Button';
@@ -10,40 +10,35 @@ import { signUpValidate } from '../../../../utils/Schema';
 import AuthContainer from '../../../../components/Hoc/authContainer';
 
 const Signup = () => {
-  const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [passwordShown, setPasswordShown] = useState(false);
   const { loading, error, successMessage, statusCode } = useSelector((state) => state.signup);
 
   const disableInput = statusCode == 200 ? true : false;
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-      companyname: '',
-      confirmpassword: '',
-      firstname: '',
-      lastname: '',
-      mobileNumber: ''
+      email: '123test@gmail.com',
+      password: 'Tech@5821',
+      companyName: 'Techno',
+      confirmPassword: 'Tech@5821',
+      firstName: 'user',
+      lastName: 'test',
+      mobileNumber: '1234567890'
     },
     onSubmit: (values) => {
-      dispatch(userSignup(values));
-      console.log(values);
+      dispatch(userSignup(values, navigate));
     },
     validateOnChange: true,
     validationSchema: signUpValidate
   });
   const handleKeyPress = (e) => {
     if (e.keyCode === 69 || e.keyCode === 190 || e.keyCode === 107 || e.keyCode === 189) {
-      // keyCode 69 represents the letter "e"
-      // keycode 190 represents the dot(.)
       e.preventDefault();
     }
   };
-  formik.values.mobileNumber = formik.values.mobileNumber.toString();
 
+  formik.values.mobileNumber = formik.values.mobileNumber.toString();
   return (
     <AuthContainer>
       <form onSubmit={formik.handleSubmit} className='form'>
@@ -57,71 +52,71 @@ const Signup = () => {
           <div>
             <InputField
               type='text'
-              name='firstname'
+              name='firstName'
               label='First Name'
-              role='FirstName'
-              value={formik.values.firstname}
+              role='firstName'
+              value={formik.values.firstName}
               onBlur={formik.handleBlur}
               placeholder='First Name'
               onChange={formik.handleChange}
               className={
-                formik.touched.firstname && formik.errors.firstname
+                formik.touched.firstName && formik.errors.firstName
                   ? 'InputFieldError'
                   : 'InputField'
               }
               disable={disableInput}
             />
-            <span className='errorSpan'>{formik.touched.firstname && formik.errors.firstname}</span>
+            <span className='errorSpan'>{formik.touched.firstName && formik.errors.firstName}</span>
           </div>
           <div>
             <InputField
               type='text'
-              name='lastname'
+              name='lastName'
               label='Last Name'
-              role='lastname'
-              value={formik.values.lastname}
+              role='lastName'
+              value={formik.values.lastName}
               onBlur={formik.handleBlur}
               placeholder='First Name'
               onChange={formik.handleChange}
               className={
-                formik.touched.lastname && formik.errors.lastname ? 'InputFieldError' : 'InputField'
+                formik.touched.lastName && formik.errors.lastName ? 'InputFieldError' : 'InputField'
               }
               disable={disableInput}
             />
-            <span className='errorSpan'>{formik.touched.lastname && formik.errors.lastname}</span>
+            <span className='errorSpan'>{formik.touched.lastName && formik.errors.lastName}</span>
           </div>
           <div>
             <InputField
               type='text'
-              name='companyname'
+              name='companyName'
               label='Company Name'
-              value={formik.values.companyname}
+              value={formik.values.companyName}
               onBlur={formik.handleBlur}
               placeholder='Please Enter your Company Name'
               onChange={formik.handleChange}
               className={
-                formik.touched.companyname && formik.errors.companyname
+                formik.touched.companyName && formik.errors.companyName
                   ? 'InputFieldError'
                   : 'InputField'
               }
               disable={disableInput}
             />
             <span className='errorSpan'>
-              {formik.touched.companyname && formik.errors.companyname}
+              {formik.touched.companyName && formik.errors.companyName}
             </span>
           </div>
           <div>
             <InputField
               type='number'
-              name='mobile_number'
+              name='mobileNumber'
               label='Mobile Number'
-              role='mobile_number'
-              value={formik.values.mobile_number}
+              role='mobileNumber'
+              value={formik.values.mobileNumber}
               onBlur={formik.handleBlur}
               placeholder='Please Enter your Mobile Number'
               onChange={formik.handleChange}
               className={
-                formik.touched.mobile_number && formik.errors.mobile_number
+                formik.touched.mobileNumber && formik.errors.mobileNumber
                   ? 'InputFieldError'
                   : 'InputField'
               }
@@ -129,7 +124,7 @@ const Signup = () => {
               onKeyDown={handleKeyPress}
             />
             <span className='errorSpan'>
-              {formik.touched.mobile_number && formik.errors.mobile_number}
+              {formik.touched.mobileNumber && formik.errors.mobileNumber}
             </span>
           </div>
           <div>
@@ -164,21 +159,12 @@ const Signup = () => {
               disable={disableInput}
             />
             <span className='passwordIconSpan'>
-              {passwordShown ? (
-                <img
-                  src='/assets/icons/eye.png'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='showpassword'
-                />
-              ) : (
-                <img
-                  src='/assets/icons/password.svg'
-                  className='passwordIcon'
-                  onClick={togglePasswordVisiblity}
-                  role='hidepassword'
-                />
-              )}
+              <img
+                src={`/assets/icons${passwordShown ? '/eye.png' : '/password.svg'}`}
+                className='passwordIcon'
+                onClick={() => setPasswordShown(!passwordShown)}
+                role='showpassword'
+              />
             </span>
             <div className='errorSpan'>
               <span>{formik.touched.password && formik.errors.password}</span>
@@ -187,24 +173,26 @@ const Signup = () => {
           <div className='passwordInput'>
             <InputField
               type='password'
-              name='confirmpassword'
+              name='confirmPassword'
               label='Confirm Password'
               placeholder={'Confirm New Password'}
-              value={formik.values.confirmpassword}
+              value={formik.values.confirmPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className={
-                formik.touched.confirmpassword && formik.errors.confirmpassword
+                formik.touched.confirmPassword && formik.errors.confirmPassword
                   ? 'InputFieldError'
                   : 'InputField'
               }
               disable={disableInput}
             />
             <span className='errorSpan'>
-              {formik.touched.confirmpassword && formik.errors.confirmpassword}
+              {formik.touched.confirmPassword && formik.errors.confirmPassword}
             </span>
           </div>
-          <Button button={'Signup'} loading={loading} />
+          <span onClick={() => formik.handleSubmit()}>
+            <Button button={'Create Account'} loading={loading} />
+          </span>
           <div>
             {successMessage && !error && <div className='successmessage'>{successMessage}</div>}
             {error && <div className='errormessage'>{error}</div>}
@@ -218,7 +206,7 @@ const Signup = () => {
               <>
                 Already have an account ?
                 <Link to='/login'>
-                  <span className='formfooterlinkspan'>Sign in instead</span>
+                  <span className='formfooterlinkspan'>Sign in</span>
                 </Link>
               </>
             )}

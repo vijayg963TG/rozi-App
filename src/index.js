@@ -6,11 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './features/store';
+import Toaster from './components/toster';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
+        <Toaster />
         <App />
       </Provider>
     </BrowserRouter>

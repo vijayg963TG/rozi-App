@@ -2,7 +2,7 @@ import React from 'react';
 import './InputField.css';
 
 const InputField = ({
-  role,
+  // role,
   disable,
   className,
   name,
@@ -30,7 +30,7 @@ const InputField = ({
         name={name}
         placeholder={placeholder}
         onChange={onChange}
-        role={role}
+        // role={role}
         disabled={disable}
         onKeyDown={onKeyDown}
       />

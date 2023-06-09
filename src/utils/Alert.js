@@ -1,4 +1,3 @@
-// import { Toast as toast } from 'react-toastify';
 import { toast } from 'react-toastify';
 
 let commonError = 'OOPS! Something went wrong!';

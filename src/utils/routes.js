@@ -4,11 +4,11 @@ import ChangePassword from '../app/screens/onBording/ChangePassword';
 import Login from '../app/screens/onBording/LogIn/index';
 import ResetPassword from '../app/screens/onBording/ResetPassword';
 import Signup from '../app/screens/onBording/Signup';
-import ForgotPassword from '../app/screens/onBording/forgotPassword';
 import NotFound from '../app/screens/notfound/NotFound';
 import Dashboard from '../app/screens/Dashboard/Dashboard';
 import AfterScan from '../app/screens/afterScanPage/AfterScan';
 import { GlobalLoader } from '../components/globalLoader';
+import ForgotPassword from '../app/screens/onBording/ForgotPassword';
 
 const Routes = () => {
   const content = useRoutes([

@@ -1,22 +1,45 @@
-import axios from 'axios';
-import { setError, setUser, setLoading } from '../features/slices/afterScanSlice';
-import { getBaseUrl } from '../utils/commonFuntion';
-const ROOT_URL = getBaseUrl();
-
+import endPoints from '../constant/endPoints';
+import { Alert } from '../utils/Alert';
+import { api } from '../utils/api';
+import { getUserIdLS } from '../utils/commonFuntion';
+const userID = getUserIdLS();
+const values = {
+  userId: userID
+};
 // during qr scanning
-export const userScanning = (token) => async (dispatch) => {
-  const Url = `${ROOT_URL}/punch_ins`;
+// export const userScanning = (token) => async (dispatch) => {
+//   const Url = `${ROOT_URL}/punch_ins`;
+//   try {
+//     dispatch(setLoading(true));
+//     const response = await axios.post(Url, null, {
+//       headers: { Authorization: token }
+//     });
+//     console.log(response);
+//     if (response) {
+//       dispatch(setUser(response.data));
+//       dispatch(setLoading(false));
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     dispatch(setError(error.response.data.error));
+//   }
+// };
+
+export const userScanning = () => async () => {
   try {
-    dispatch(setLoading(true));
-    const response = await axios.post(Url, null, {
-      headers: { Authorization: token }
-    });
-    console.log(response);
-    if (response) {
-      dispatch(setUser(response.data));
-    }
+    api.postApiCall(
+      endPoints.recordAttendance,
+      values,
+      (res) => {
+        console.log(res.data.message);
+        Alert(1, res.data.message);
+      },
+      (err) => {
+        console.log(err.error.message);
+        Alert(2);
+      }
+    );
   } catch (error) {
-    console.log(error);
-    dispatch(setError(error.response.data.error));
+    console.error(error);
   }
 };

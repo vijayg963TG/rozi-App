@@ -1,10 +1,10 @@
 const endPoints = {
   create: '/create',
   login: '/login',
-  logout: '/logout/:id',
+  logout: '/logout',
   sendMail: '/sendmail',
-  resetPassword: '/reset-password',
-  changePassword: '/change-password/:id',
+  resetPassword: '/reset-password/?token=',
+  changePassword: '/change-password/',
   recordAttendance: '/record-attendance'
 };
 

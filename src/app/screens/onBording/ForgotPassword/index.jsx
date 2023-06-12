@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import Button from '../../../../components/button/Button';
 import InputField from '../../../../components/input/InputField';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { forgotValidate } from '../../../../utils/Schema';
 import AuthContainer from '../../../../components/Hoc/authContainer';
 import { useDispatch } from 'react-redux';
@@ -10,14 +10,13 @@ import { forgotPassword } from '../../../../api/forgotPasswordApi';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [waitRes, setWaitRes] = useState(false);
   const formik = useFormik({
     initialValues: {
-      email: ''
+      email: 'vijay.gupta@technogetic.com'
     },
     onSubmit: (values) => {
-      console.log(values);
-      dispatch(forgotPassword(values, navigate));
+      dispatch(forgotPassword(values, setWaitRes));
     },
     validateOnChange: true,
     validationSchema: forgotValidate
@@ -49,7 +48,7 @@ const ForgotPassword = () => {
             />
             <span className='errorSpan'>{formik.touched.email && formik.errors.email}</span>
 
-            <Button button={'Verify Email'} />
+            <Button loading={waitRes} button={'Verify Email'} />
 
             <div className='formfooter'>
               <span>{`Return to`}</span>

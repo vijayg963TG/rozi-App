@@ -9,8 +9,7 @@ const dashboardReducer = createSlice({
     setData(state, action) {
       state.data = action.payload;
     }
-  },
-  extraReducers: {}
+  }
 });
 
 export const { setData } = dashboardReducer.actions;

@@ -25,8 +25,7 @@ const afterScanReducer = createSlice({
       state.user = null;
       state.loading = false;
     }
-  },
-  extraReducers: {}
+  }
 });
 
 export const { setLoading, setError, setStatusCode, setUser } = afterScanReducer.actions;

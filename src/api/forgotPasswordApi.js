@@ -2,22 +2,22 @@ import { Alert } from '../utils/Alert';
 import endPoints from '../constant/endPoints';
 import { api } from '../utils/api';
 
-export const forgotPassword = (values, navigate) => async (dispatch) => {
+export const forgotPassword = (values, setWaitRes) => async () => {
   try {
+    setWaitRes(true);
     api.postApiCall(
       endPoints.sendMail,
       values,
       (response) => {
-        console.log(response);
         Alert(1, response.data.message);
-        dispatch();
-        navigate('/');
+        setWaitRes(false);
       },
       (err) => {
-        console.log(err);
+        setWaitRes(false);
+        Alert(2, err.message);
       }
     );
   } catch (error) {
-    Alert(2);
+    Alert(2, error.message);
   }
 };

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import NewPassword from '../app/screens/onBording/NewPassword';
+import ChangePassword from '../app/screens/onBording/ChangePassword';
 import Login from '../app/screens/onBording/LogIn/index';
 import ResetPassword from '../app/screens/onBording/ResetPassword';
 import Signup from '../app/screens/onBording/Signup';
@@ -22,27 +22,19 @@ const Routes = () => {
     },
     {
       path: '/signup',
-      element: (
-        <Suspense fallback={<GlobalLoader />}>
-          <Signup />
-        </Suspense>
-      )
+      element: <Signup />
     },
     {
       path: '/login',
-      element: (
-        <Suspense fallback={<GlobalLoader />}>
-          <Login />
-        </Suspense>
-      )
+      element: <Login />
     },
     {
       path: '/forgotpassword',
       element: <ForgotPassword />
     },
     {
-      path: '/newpassword',
-      element: <NewPassword />
+      path: '/changepassword',
+      element: <ChangePassword />
     },
 
     {

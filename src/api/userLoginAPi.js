@@ -26,8 +26,8 @@ export const userLogin = (values, navigate) => async (dispatch) => {
         dispatch(setLoading(false));
         navigate('/');
       },
-      (res) => {
-        Alert(2, res.response.data.message);
+      (err) => {
+        Alert(2, err.response.data.message);
         dispatch(setLoading(false));
       }
     );

@@ -4,18 +4,30 @@ import { useState } from 'react';
 import InputField from '../../../../components/input/InputField';
 import Button from '../../../../components/button/Button';
 import { resetPasswordValidate } from '../../../../utils/Schema';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContainer from '../../../../components/Hoc/authContainer';
+import queryString from 'query-string';
+import { useDispatch } from 'react-redux';
+import { resetPasswordApi } from '../../../../api/resetPasswordApi';
 
 const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [newpasswordShown, setNewPasswordShown] = useState(false);
+  const urlParams = queryString.parse(window.location.search);
+  let tokenFromUrl = urlParams.token;
   const formik = useFormik({
     initialValues: {
-      newPassword: '',
-      confirmPassword: ''
+      newPassword: 'Tech@1234',
+      confirmPassword: 'Tech@1234'
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, { setFieldError }) => {
+      if (values.newPassword !== values.confirmPassword) {
+        setFieldError('ConfirmPassword', 'Password must match');
+        return;
+      }
+      dispatch(resetPasswordApi(values, navigate, tokenFromUrl, setLoading));
     },
     validateOnChange: true,
     validationSchema: resetPasswordValidate
@@ -78,9 +90,9 @@ const ResetPassword = () => {
             </span>
           </div>
           <div>
-            <Button button={'Continue'} />
+            <Button loading={loading} button={'Continue'} />
             <div className='formfooter'>
-              <span>{`Return to `}</span>
+              <span>{`Return to`}</span>
               <Link to='/login'>
                 <span className='formfooterlinkspan'>Sign in</span>
               </Link>

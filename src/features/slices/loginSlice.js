@@ -33,8 +33,7 @@ const loginReducer = createSlice({
     setTokenData(state, action) {
       state.tokenData = action.payload;
     }
-  },
-  extraReducers: {}
+  }
 });
 
 export const { setLoading, setError, setStatusCode, setUser, setSuccessMessage, setTokenData } =

@@ -4,17 +4,17 @@ import Modal from '../../../components/modal/Modal';
 import './AfterScan.css';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getTokenFromLS } from '../../../utils/commonFuntion';
 
 const AfterScan = () => {
   const { loading, error, user } = useSelector((state) => state.afterScan);
-  const { data } = useSelector((state) => state.dashboard);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = getTokenFromLS();
-    if (token && data) {
+    console.log(token);
+    if (token) {
       console.log('valid user');
     } else {
       navigate('/');

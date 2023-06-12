@@ -9,3 +9,11 @@ export const setTokenFromLS = (token) => {
 export const getTokenFromLS = () => {
   return localStorage.getItem('token');
 };
+
+export const setUserIdLS = (userId) => {
+  return localStorage.setItem('userId', userId);
+};
+
+export const getUserIdLS = () => {
+  return localStorage.getItem('userId');
+};

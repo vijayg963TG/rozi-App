@@ -10,13 +10,10 @@
   background-color: white;
   width: 80vw;
   height: 80vh;
-  box-shadow: 5px 10px 5px 10px #888888;
+  border-radius: 0.5rem;
+  /* box-shadow: 5px 10px 5px 10px #888888; */
 }
-@media screen and (max-width: 768px) {
-  .subcontainer {
-    width: 90vw;
-  }
-}
+
 .userinformationssection {
   background-color: black;
   width: 30%;
@@ -29,18 +26,14 @@
   font-weight: 800;
 }
 
-.qrcodescannersection,
-.qrcodescannersectionMobile {
+.qrcodescannersection {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 70%;
 }
-.qrcodescannersectionMobile {
-  margin-bottom: 100px;
-  width: 100%;
-}
+
 .qrcodescannersectionbtn {
   height: 50px;
   min-width: 250px;
@@ -87,25 +80,47 @@
 .userinformationssectionspan {
   margin-top: 20px;
 }
-.userinformationssectionspanMobile {
-  margin-top: 40px;
-  font-size: 20px;
-}
+
 .qrreader {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 300px;
 }
+
 .resetpasswordlink {
   padding-top: 15px;
 }
+
 .resetpasswordlinkspan {
   color: white;
 }
+
 .resetpasswordlinMobile {
   margin-top: 50px;
 }
-.resetpasswordlinkspanMobile {
-  color: rgb(25, 96, 189);
+
+.BtnSec {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .subcontainer {
+    width: 90vw;
+  }
+
+  .qrcodescannersection {
+    margin-bottom: 100px;
+    width: 100%;
+  }
+
+  .resetpasswordlinkspan {
+    color: rgb(25, 96, 189);
+  }
+
+  .userinformationssection {
+    display: none;
+  }
 }

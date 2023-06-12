@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getBaseUrl } from './commonFuntion';
+import { getBaseUrl, getTokenFromLS } from './commonFuntion';
 
 const axiosInstance = axios.create({
   baseURL: getBaseUrl(),
@@ -8,5 +8,18 @@ const axiosInstance = axios.create({
   //   'X-AUTH-TOKEN': getTokenFromLS() || ''
   // }
 });
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const user = getTokenFromLS();
+    if (user) {
+      config.headers['Authorization'] = `Bearer ${user}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default axiosInstance;

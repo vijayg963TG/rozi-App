@@ -12,6 +12,8 @@
     "formik": "^2.2.9",
     "formik-validators": "^0.0.8",
     "jwt-decode": "^3.1.2",
+    "modern-react-qr-reader": "^1.0.12",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-qr-reader": "^3.0.0-beta-1",

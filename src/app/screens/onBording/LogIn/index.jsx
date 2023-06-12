@@ -15,12 +15,12 @@ import { getTokenFromLS } from '../../../../utils/commonFuntion';
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.login);
   const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.login);
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: 'vijay.gupta@technogetic.com',
+      password: 'Tech@1234'
     },
     onSubmit: (values) => {
       dispatch(userLogin(values, navigate));

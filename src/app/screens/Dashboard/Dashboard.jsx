@@ -32,6 +32,7 @@ const Dashboard = () => {
       if (result.text == correctScanUrl) {
         dispatch(userScanning(userID, navigate));
         isScanned = true;
+        setShowScanner(false);
         // return <Modal />;
       } else {
         navigate('/');

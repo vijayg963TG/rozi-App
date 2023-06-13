@@ -14,7 +14,7 @@ export default function Modal() {
   useEffect(() => {
     if (user != null) {
       setTimeout(() => {
-        navigate('/');
+        navigate('/login');
       }, 5000);
     }
   }, [user]);

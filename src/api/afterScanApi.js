@@ -1,14 +1,11 @@
 import endPoints from '../constant/endPoints';
 import { Alert } from '../utils/Alert';
 import { api } from '../utils/api';
-import { getUserIdLS } from '../utils/commonFuntion';
 
-const userID = getUserIdLS();
-const values = {
-  userId: userID
-};
-
-export const userScanning = () => async () => {
+export const userScanning = (userID) => async () => {
+  const values = {
+    userId: userID
+  };
   try {
     api.postApiCall(
       endPoints.recordAttendance,
@@ -23,6 +20,7 @@ export const userScanning = () => async () => {
       }
     );
   } catch (error) {
+    Alert(2);
     console.error(error);
   }
 };

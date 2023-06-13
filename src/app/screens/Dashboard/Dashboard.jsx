@@ -18,6 +18,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const token = getTokenFromLS();
   const decodedToken = token ? jwtDecode(token) : '';
+  const userID = decodedToken ? decodedToken.userId : '';
+  console.log(userID);
   const [result, setResult] = useState('No Result');
   console.log(result);
 
@@ -29,7 +31,7 @@ const Dashboard = () => {
       Alert(1, 'QR Scan Successfully');
       setResult(result);
       if (result.text == correctScanUrl) {
-        dispatch(userScanning());
+        dispatch(userScanning(userID));
         navigate('/roziroti/qrscanned');
       } else {
         navigate('/');
@@ -39,7 +41,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (token) {
-      setUserIdLS(decodedToken.userId);
+      setUserIdLS(userID);
       try {
         if (token == null) {
           navigate('/login');

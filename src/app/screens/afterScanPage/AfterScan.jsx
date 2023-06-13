@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import './AfterScan.css';
 import Modal from '../../../components/modal/Modal';
-// import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getTokenFromLS } from '../../../utils/commonFuntion';
 
 const AfterScan = () => {
-  // const { error, user } = useSelector((state) => state.afterScan);
   const navigate = useNavigate();
 
   useEffect(() => {

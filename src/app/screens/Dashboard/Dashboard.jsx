@@ -89,6 +89,13 @@ const Dashboard = () => {
                     <span className='resetpasswordlinkspanMobile'>Change Password </span>
                   </button>
                 </Link>
+                <butto
+                  onClick={() => {
+                    dispatch(userScanning(userID, navigate));
+                  }}
+                >
+                  Check
+                </butto>
               </div>
             </>
           )}

@@ -26,11 +26,11 @@ const Dashboard = () => {
   const handleScan = (result) => {
     if (result) {
       console.log(result);
-      Alert(1);
+      Alert(1, 'QR Scan Successfully');
       setResult(result);
       if (result.text == correctScanUrl) {
         dispatch(userScanning());
-        navigate('/roziroti/qrscanned');
+        navigate(correctScanUrl);
       } else {
         navigate('/');
       }

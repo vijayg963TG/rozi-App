@@ -12,10 +12,10 @@ export const userScanning = (userID) => async () => {
       values,
       (res) => {
         console.log(res);
-        Alert(1, res.data.message);
+        Alert(1, res.response.data.message);
       },
       (err) => {
-        Alert(2, err.response.data.message);
+        Alert(2, err.$c.response.data.message);
         console.log(err);
       }
     );

@@ -13,13 +13,13 @@ export const userScanning = (userID) => async () => {
       (res) => {
         alert(JSON.stringify(res));
 
-        // console.log(res);
-        // Alert(1, res.response.data.message);
+        console.log(res);
+        Alert(1, res.data.message);
       },
       (err) => {
         alert(JSON.stringify(err));
-        // Alert(2, err.$c.response.data.message);
-        // console.log(err);
+        Alert(2, err.response.data.message);
+        console.log(err);
       }
     );
   } catch (error) {

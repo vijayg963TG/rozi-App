@@ -15,7 +15,6 @@ export const userSignup = (values, navigate) => async (dispatch) => {
       endPoints.create,
       values,
       (response) => {
-        console.log(response);
         const { message } = response.data;
         Alert(1, message);
         dispatch(setSuccessMessage(message));

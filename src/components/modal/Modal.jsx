@@ -15,32 +15,22 @@ export default function Modal() {
     if (user != null) {
       setTimeout(() => {
         navigate('/');
-      }, 8000);
+      }, 5000);
     }
   }, [user]);
+
   return (
     <>
       {modal && (
         <div className='modal'>
-          <div className='overlay'>
-            {/* {loading && (
-              <div className='modalloader'>
-                <Icon name='loader' size='200px' />
-              </div>
-            )} */}
-          </div>
-          {/* {!loading && ( */}
+          <div className='overlay'></div>
           <div className='modal-content'>
-            {/* {error && ( */}
             <div>
-              {/* <Icon name='cancel' size={'60px'} />{' '} */}
-              <p className='errortext'>You can only scan once a day</p>
+              {/* <p className='errortext'>You can only scan once a day</p> */}
               <button className='close-modal' onClick={toggleModal}>
                 CLOSE
               </button>
             </div>
-            {/* )} */}
-            {/* {user != null && ( */}
             <div>
               <img src='/assets/images/success2.gif' className='successgif' />{' '}
               <p className='successtext'>
@@ -54,9 +44,7 @@ export default function Modal() {
                 CLOSE
               </button>
             </div>
-            {/* )} */}
           </div>
-          {/* )} */}
         </div>
       )}
     </>

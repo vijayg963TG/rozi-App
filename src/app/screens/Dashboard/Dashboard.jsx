@@ -10,6 +10,7 @@ import { userScanning } from '../../../api/afterScanApi';
 import { userLogout } from '../../../api/logoutApi';
 import Scaner from './Scaner';
 import { Alert } from '../../../utils/Alert';
+import Modal from '../../../components/modal/Modal';
 
 const Dashboard = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -28,6 +29,7 @@ const Dashboard = () => {
       if (result.text == correctScanUrl) {
         dispatch(userScanning(userID, navigate));
         navigate('/roziroti/qrscanned');
+        return <Modal />;
       } else {
         navigate('/');
       }

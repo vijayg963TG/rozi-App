@@ -9,8 +9,7 @@ const Scaner = ({ handleScan }) => {
   };
 
   const handleError = (error) => {
-    Alert(2);
-    console.log(error);
+    Alert(2, `${error || 'Requested device not found'}`);
   };
 
   return (

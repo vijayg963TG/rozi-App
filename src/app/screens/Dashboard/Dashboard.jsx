@@ -30,7 +30,7 @@ const Dashboard = () => {
       setResult(result);
       if (result.text == correctScanUrl) {
         dispatch(userScanning());
-        navigate(correctScanUrl);
+        navigate('/roziroti/qrscanned');
       } else {
         navigate('/');
       }

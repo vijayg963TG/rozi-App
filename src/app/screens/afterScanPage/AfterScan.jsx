@@ -1,14 +1,12 @@
-import React from 'react';
-// import '../dashboard/Dashboard.css';
-import Modal from '../../../components/modal/Modal';
+import React, { useEffect } from 'react';
 import './AfterScan.css';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import Modal from '../../../components/modal/Modal';
+// import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getTokenFromLS } from '../../../utils/commonFuntion';
 
 const AfterScan = () => {
-  const { loading, error, user } = useSelector((state) => state.afterScan);
+  // const { error, user } = useSelector((state) => state.afterScan);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,11 +21,11 @@ const AfterScan = () => {
 
   return (
     <div className='dashboardcontainer'>
+      <Modal />
       <div>
         <div>
-          <div className='qrcodescannersectionMobile'>
+          <div className='qrcodescannersection'>
             <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
-            {<Modal loading={loading} error={error} user={user} />}
             <div className='loginlink'>
               Hey User Return back to <Link to={'/login'}> Login</Link>
             </div>

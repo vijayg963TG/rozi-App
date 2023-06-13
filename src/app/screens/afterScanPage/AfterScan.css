@@ -1,5 +1,32 @@
+.dashboardcontainer {
+  background-color: #bed6bb;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loginlink {
   color: #232323;
   font-size: medium;
   padding-top: 20px;
+}
+
+.dashboradlogo {
+  border: 1px solid white;
+  background-color: white;
+  padding: 5px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+.qrcodescannersection {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .qrcodescannersection {
+    margin-bottom: 100px;
+    width: 100%;
+  }
 }

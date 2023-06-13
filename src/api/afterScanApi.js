@@ -12,16 +12,17 @@ export const userScanning = (userID, navigate) => async () => {
       values,
       (res) => {
         console.log(res);
-        Alert(1, res.message);
+        Alert(1, res.response.data.message);
         navigate('/roziroti/qrscanned');
       },
       (err) => {
-        console.log(err.message);
-        Alert(2, err.message);
+        Alert(2, err.response.data.message);
+        console.log(err);
         navigate('/roziroti/qrscanned');
       }
     );
   } catch (error) {
+    console.log(error);
     Alert(2);
     console.error(error);
   }

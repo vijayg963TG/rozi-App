@@ -20,7 +20,7 @@ const Login = () => {
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: 'Tech@1234'
+      password: ''
     },
     onSubmit: (values) => {
       dispatch(userLogin(values, navigate));

@@ -9,7 +9,6 @@ const AfterScan = () => {
 
   useEffect(() => {
     const token = getTokenFromLS();
-    console.log(token);
     if (token) {
       return;
     } else {

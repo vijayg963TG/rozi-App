@@ -13,7 +13,7 @@ const ForgotPassword = () => {
   const [waitRes, setWaitRes] = useState(false);
   const formik = useFormik({
     initialValues: {
-      email: 'vijay.gupta@technogetic.com'
+      email: ''
     },
     onSubmit: (values) => {
       dispatch(forgotPassword(values, setWaitRes));

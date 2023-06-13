@@ -16,14 +16,14 @@ const Scaner = ({ handleScan }) => {
   return (
     <>
       <QrReader
+        facingMode='rear'
         delay={500}
         style={previewStyle}
         onError={handleError}
         onScan={handleScan}
-        facingMode={'environment'}
-        // constraints={{
-        //   video: { facingMode: 'environment' }
-        // }}
+        constraints={{
+          video: { facingMode: 'environment' }
+        }}
       />
     </>
   );

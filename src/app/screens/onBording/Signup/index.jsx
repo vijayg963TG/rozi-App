@@ -18,13 +18,13 @@ const Signup = () => {
   const disableInput = statusCode == 200 ? true : false;
   const formik = useFormik({
     initialValues: {
-      email: '123test@gmail.com',
-      password: 'Tech@5821',
-      companyName: 'Techno',
-      confirmPassword: 'Tech@5821',
-      firstName: 'user',
-      lastName: 'test',
-      mobileNumber: '1234567890'
+      email: '',
+      password: '',
+      companyName: '',
+      confirmPassword: '',
+      firstName: '',
+      lastName: '',
+      mobileNumber: ''
     },
     onSubmit: (values) => {
       dispatch(userSignup(values, navigate));

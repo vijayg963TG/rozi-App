@@ -2,10 +2,12 @@ import endPoints from '../constant/endPoints';
 import { Alert } from '../utils/Alert';
 import { api } from '../utils/api';
 import { getUserIdLS } from '../utils/commonFuntion';
+
 const userID = getUserIdLS();
 const values = {
   userId: userID
 };
+
 // during qr scanning
 // export const userScanning = (token) => async (dispatch) => {
 //   const Url = `${ROOT_URL}/punch_ins`;
@@ -31,7 +33,7 @@ export const userScanning = () => async () => {
       endPoints.recordAttendance,
       values,
       (res) => {
-        console.log(res.data.message);
+        console.log(res);
         Alert(1, res.data.message);
       },
       (err) => {

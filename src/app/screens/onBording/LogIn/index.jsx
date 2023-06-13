@@ -19,7 +19,7 @@ const Login = () => {
   const { loading, error } = useSelector((state) => state.login);
   const formik = useFormik({
     initialValues: {
-      email: 'vijay.gupta@technogetic.com',
+      email: '',
       password: 'Tech@1234'
     },
     onSubmit: (values) => {
@@ -34,7 +34,6 @@ const Login = () => {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken);
         if (decodedToken && decodedToken.exp > Date.now() / 1000) {
           navigate('/');
         }

@@ -16,9 +16,9 @@ const ChangePassword = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const formik = useFormik({
     initialValues: {
-      oldPassword: 'Tech@1234',
-      newPassword: 'Vijayg963@',
-      confirmPassword: 'Vijayg963@'
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: ''
     },
     onSubmit: (values, { setFieldError }) => {
       if (values.newPassword !== values.confirmPassword) {

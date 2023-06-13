@@ -19,8 +19,8 @@ const ResetPassword = () => {
   let tokenFromUrl = urlParams.token;
   const formik = useFormik({
     initialValues: {
-      newPassword: 'Tech@1234',
-      confirmPassword: 'Tech@1234'
+      newPassword: '',
+      confirmPassword: ''
     },
     onSubmit: (values, { setFieldError }) => {
       if (values.newPassword !== values.confirmPassword) {

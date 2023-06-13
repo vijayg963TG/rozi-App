@@ -11,7 +11,7 @@ const AfterScan = () => {
     const token = getTokenFromLS();
     console.log(token);
     if (token) {
-      console.log('valid user');
+      return;
     } else {
       navigate('/');
     }

@@ -19,20 +19,14 @@ const Dashboard = () => {
   const token = getTokenFromLS();
   const decodedToken = token ? jwtDecode(token) : '';
   const userID = decodedToken ? decodedToken.userId : '';
-  console.log(userID);
-  const [result, setResult] = useState('No Result');
-  console.log(result);
 
   const correctScanUrl = 'https://qr-code-fronted.vercel.app/roziroti/qrscanned';
 
   const handleScan = (result) => {
     if (result) {
-      console.log(result);
       Alert(1, 'QR Scan Successfully');
-      setResult(result);
       if (result.text == correctScanUrl) {
-        dispatch(userScanning(userID));
-        navigate('/roziroti/qrscanned');
+        dispatch(userScanning(userID, navigate));
       } else {
         navigate('/');
       }

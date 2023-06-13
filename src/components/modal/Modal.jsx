@@ -34,13 +34,7 @@ export default function Modal() {
             {/* {error && ( */}
             <div>
               {/* <Icon name='cancel' size={'60px'} />{' '} */}
-              <p className='errortext'>
-                You can only scan once a day Press
-                <Link to='/'>
-                  <span className='okspanerror'>OK</span>
-                </Link>
-                to go to home page or you will be automatically redirected
-              </p>
+              <p className='errortext'>You can only scan once a day</p>
               <button className='close-modal' onClick={toggleModal}>
                 CLOSE
               </button>

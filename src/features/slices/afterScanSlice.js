@@ -11,7 +11,7 @@ const afterScanReducer = createSlice({
   initialState,
   reducers: {
     setShowModal(state) {
-      state.showModal = true;
+      state.showModal = !state.showModal;
     },
     setLoading(state, action) {
       state.loading = action.payload;

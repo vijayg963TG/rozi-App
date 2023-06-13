@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Modal.css';
 import { getTokenFromLS } from '../../utils/commonFuntion';
+import { useDispatch } from 'react-redux';
+import { setShowModal } from '../../features/slices/afterScanSlice';
 
 export default function Modal() {
   const [modal, setModal] = useState(true);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -14,7 +16,7 @@ export default function Modal() {
   useEffect(() => {
     if (user != null) {
       setTimeout(() => {
-        navigate('/login');
+        dispatch(setShowModal());
       }, 5000);
     }
   }, [user]);

@@ -11,12 +11,15 @@ export const userScanning = (userID) => async () => {
       endPoints.recordAttendance,
       values,
       (res) => {
-        console.log(res);
-        Alert(1, res.response.data.message);
+        alert(JSON.stringify(res));
+
+        // console.log(res);
+        // Alert(1, res.response.data.message);
       },
       (err) => {
-        Alert(2, err.$c.response.data.message);
-        console.log(err);
+        alert(JSON.stringify(err));
+        // Alert(2, err.$c.response.data.message);
+        // console.log(err);
       }
     );
   } catch (error) {

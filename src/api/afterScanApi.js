@@ -1,8 +1,9 @@
 import endPoints from '../constant/endPoints';
 import { Alert } from '../utils/Alert';
 import { api } from '../utils/api';
+import { setShowModal } from '../features/slices/afterScanSlice';
 
-export const userScanning = (userID) => async () => {
+export const userScanning = (userID) => async (dispatch) => {
   const values = {
     userId: userID
   };
@@ -11,12 +12,11 @@ export const userScanning = (userID) => async () => {
       endPoints.recordAttendance,
       values,
       (res) => {
-        console.log(res);
         Alert(1, res.data.message);
+        dispatch(setShowModal());
       },
       (err) => {
         Alert(2, err.response.data.message);
-        console.log(err);
       }
     );
   } catch (error) {

@@ -2,14 +2,13 @@ import React from 'react';
 import './dashboard.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import { useEffect } from 'react';
 import { getTokenFromLS, setUserIdLS } from '../../../utils/commonFuntion';
 import { userScanning } from '../../../api/afterScanApi';
 import { userLogout } from '../../../api/logoutApi';
 import Scaner from './Scaner';
-import { Alert } from '../../../utils/Alert';
 import Modal from '../../../components/modal/Modal';
 
 const Dashboard = () => {
@@ -18,6 +17,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = getTokenFromLS();
+  const { showModal } = useSelector((state) => state.afterScan);
+  console.log(showModal);
   const decodedToken = token ? jwtDecode(token) : '';
   const userID = decodedToken ? decodedToken.userId : '';
 
@@ -25,11 +26,9 @@ const Dashboard = () => {
 
   const handleScan = (result) => {
     if (result) {
-      Alert(1, 'QR Scan Successfully');
       if (result.text == correctScanUrl) {
         dispatch(userScanning(userID, navigate));
-        navigate('/roziroti/qrscanned');
-        return <Modal />;
+        // return <Modal />;
       } else {
         navigate('/');
       }
@@ -56,6 +55,7 @@ const Dashboard = () => {
 
   return (
     <div className='dashboardcontainer'>
+      {showModal && <Modal />}
       <div className='subcontainer'>
         <div className='userinformationssection'>
           <img src='/assets/images/roziroti-logos.jpeg' className='dashboradlogo' />
@@ -89,13 +89,6 @@ const Dashboard = () => {
                     <span className='resetpasswordlinkspanMobile'>Change Password </span>
                   </button>
                 </Link>
-                <butto
-                  onClick={() => {
-                    dispatch(userScanning(userID, navigate));
-                  }}
-                >
-                  Check
-                </butto>
               </div>
             </>
           )}

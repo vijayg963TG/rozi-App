@@ -3,12 +3,16 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
-  statusCode: ''
+  statusCode: '',
+  showModal: false
 };
 const afterScanReducer = createSlice({
-  name: 'user_Login',
+  name: 'scanData',
   initialState,
   reducers: {
+    setShowModal(state) {
+      state.showModal = true;
+    },
     setLoading(state, action) {
       state.loading = action.payload;
     },
@@ -28,5 +32,6 @@ const afterScanReducer = createSlice({
   }
 });
 
-export const { setLoading, setError, setStatusCode, setUser } = afterScanReducer.actions;
+export const { setShowModal, setLoading, setError, setStatusCode, setUser } =
+  afterScanReducer.actions;
 export default afterScanReducer.reducer;

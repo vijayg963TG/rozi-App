@@ -1,6 +1,6 @@
 import React from 'react';
 import './dashboard.css';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import jwtDecode from 'jwt-decode';
@@ -23,11 +23,15 @@ const Dashboard = () => {
   const userID = decodedToken ? decodedToken.userId : '';
 
   const correctScanUrl = 'https://qr-code-fronted.vercel.app/roziroti/qrscanned';
-
+  let isScanned = useMemo(() => false, []);
   const handleScan = (result) => {
+    if (isScanned) {
+      return;
+    }
     if (result) {
       if (result.text == correctScanUrl) {
         dispatch(userScanning(userID, navigate));
+        isScanned = true;
         // return <Modal />;
       } else {
         navigate('/');

@@ -27,6 +27,7 @@ const Dashboard = () => {
       Alert(1, 'QR Scan Successfully');
       if (result.text == correctScanUrl) {
         dispatch(userScanning(userID, navigate));
+        navigate('/roziroti/qrscanned');
       } else {
         navigate('/');
       }

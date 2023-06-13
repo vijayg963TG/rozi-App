@@ -2,7 +2,7 @@ import endPoints from '../constant/endPoints';
 import { Alert } from '../utils/Alert';
 import { api } from '../utils/api';
 
-export const userScanning = (userID, navigate) => async () => {
+export const userScanning = (userID) => async () => {
   const values = {
     userId: userID
   };
@@ -12,13 +12,11 @@ export const userScanning = (userID, navigate) => async () => {
       values,
       (res) => {
         console.log(res);
-        Alert(1, res.response.data.message);
-        navigate('/roziroti/qrscanned');
+        Alert(1, res.data.message);
       },
       (err) => {
         Alert(2, err.response.data.message);
         console.log(err);
-        navigate('/roziroti/qrscanned');
       }
     );
   } catch (error) {

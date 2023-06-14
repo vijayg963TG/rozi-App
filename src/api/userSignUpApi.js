@@ -23,10 +23,10 @@ export const userSignup = (values, navigate) => async (dispatch) => {
         navigate('/login');
       },
       (err) => {
+        dispatch(setLoading(false));
         const { message } = err.response.data.error;
         console.log(message);
         Alert(2, message);
-        dispatch(setLoading(false));
       }
     );
   } catch (error) {

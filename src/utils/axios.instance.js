@@ -3,7 +3,7 @@ import { getBaseUrl, getTokenFromLS } from './commonFuntion';
 
 const axiosInstance = axios.create({
   baseURL: getBaseUrl(),
-  timeout: 100000
+  timeout: 30000
   // headers: {
   //   'X-AUTH-TOKEN': getTokenFromLS() || ''
   // }
